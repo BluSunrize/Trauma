@@ -1,0 +1,56 @@
+package blusunrize.trauma.common;
+
+import blusunrize.trauma.api.CapabilityTrauma;
+import blusunrize.trauma.common.utils.EventHandler;
+import blusunrize.trauma.common.utils.commands.CommandTrauma;
+import blusunrize.trauma.common.utils.network.MessageTraumaStatusSync;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import net.minecraftforge.fml.relauncher.Side;
+
+/**
+ * This code is licensed under "Blu's License of Common Sense"
+ * Details can be found in the license file in the root folder of this project
+ * <p>
+ * Copyright:
+ *
+ * @author BluSunrize
+ * @since 20.09.2017
+ */
+@Mod(modid = Trauma.MODID, name = Trauma.MODNAME, version = Trauma.VERSION)
+public class Trauma
+{
+	public static final String MODID = "trauma";
+	public static final String MODNAME = "Trauma";
+	public static final String VERSION = "0.9";
+
+	@Mod.Instance(MODID)
+	public static Trauma instance = new Trauma();
+	@SidedProxy(clientSide = "blusunrize.trauma.client.ClientProxy", serverSide = "blusunrize.trauma.common.CommonProxy")
+	public static CommonProxy proxy;
+
+	public static final SimpleNetworkWrapper packetHandler = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
+
+	@Mod.EventHandler
+	public void init(FMLInitializationEvent event)
+	{
+		CapabilityTrauma.register();
+		MinecraftForge.EVENT_BUS.register(new EventHandler());
+
+		int messageId = 0;
+		packetHandler.registerMessage(MessageTraumaStatusSync.HandlerServer.class, MessageTraumaStatusSync.class, messageId++, Side.SERVER);
+		packetHandler.registerMessage(MessageTraumaStatusSync.HandlerClient.class, MessageTraumaStatusSync.class, messageId++, Side.CLIENT);
+	}
+
+	@Mod.EventHandler
+	public void serverStarting(FMLServerStartingEvent event)
+	{
+		event.registerServerCommand(new CommandTrauma());
+	}
+
+}

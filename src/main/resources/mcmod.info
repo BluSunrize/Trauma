@@ -1,0 +1,16 @@
+[
+{
+  "modid": "trauma",
+  "name": "Trauma",
+  "description": "",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "https://github.com/BluSunrize/Trauma",
+  "updateUrl": "",
+  "authorList": ["BluSunrize"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
