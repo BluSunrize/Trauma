@@ -1,0 +1,38 @@
+ï»¿ Byte Order Mark, because fuck you IntelliJ
+
+desc.trauma.limb.HEAD=Head
+desc.trauma.limb.CHEST=Chest
+desc.trauma.limb.ABDOMEN=Abdomen
+desc.trauma.limb.ARM_MAIN=Dominant Arm
+desc.trauma.limb.ARM_OFFHAND=Nondominant Arm
+desc.trauma.limb.LEG_LEFT=Left Leg
+desc.trauma.limb.LEG_RIGHT=Right Leg
+
+desc.trauma.state.NONE=Uninjured
+desc.trauma.state.LIGHT=Lightly Injured
+desc.trauma.state.MEDIUM=Injured
+desc.trauma.state.HEAVY=Heavily Injured
+
+desc.trauma.limb.HEAD.state.LIGHT=Concussed
+desc.trauma.limb.HEAD.state.MEDIUM=Bruised
+desc.trauma.limb.HEAD.state.HEAVY=Crushed
+desc.trauma.limb.CHEST.state.LIGHT=Winded
+desc.trauma.limb.CHEST.state.MEDIUM=
+desc.trauma.limb.CHEST.state.HEAVY=Crushed
+desc.trauma.limb.ABDOMEN.state.LIGHT=
+desc.trauma.limb.ABDOMEN.state.MEDIUM=
+desc.trauma.limb.ABDOMEN.state.HEAVY=Torn
+desc.trauma.limb.ARM_MAIN.state.LIGHT=Sprained
+desc.trauma.limb.ARM_MAIN.state.MEDIUM=Broken
+desc.trauma.limb.ARM_MAIN.state.HEAVY=Maimed
+desc.trauma.limb.ARM_OFFHAND.state.LIGHT=Sprained
+desc.trauma.limb.ARM_OFFHAND.state.MEDIUM=Broken
+desc.trauma.limb.ARM_OFFHAND.state.HEAVY=Maimed
+desc.trauma.limb.LEG_LEFT.state.LIGHT=Sprained
+desc.trauma.limb.LEG_LEFT.state.MEDIUM=Broken
+desc.trauma.limb.LEG_LEFT.state.HEAVY=
+desc.trauma.limb.LEG_RIGHT.state.LIGHT=Sprained
+desc.trauma.limb.LEG_RIGHT.state.MEDIUM=Broken
+desc.trauma.limb.LEG_RIGHT.state.HEAVY=
+
+des.trauma.useItem=Rightclick to use %s on this limb

@@ -8,6 +8,8 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
@@ -37,14 +39,27 @@ public class Trauma
 	public static final SimpleNetworkWrapper packetHandler = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
 
 	@Mod.EventHandler
+	public void preInit(FMLPreInitializationEvent event)
+	{
+		proxy.preInit();
+	}
+
+	@Mod.EventHandler
 	public void init(FMLInitializationEvent event)
 	{
+		proxy.init();
 		CapabilityTrauma.register();
 		MinecraftForge.EVENT_BUS.register(new EventHandler());
 
 		int messageId = 0;
 		packetHandler.registerMessage(MessageTraumaStatusSync.HandlerServer.class, MessageTraumaStatusSync.class, messageId++, Side.SERVER);
 		packetHandler.registerMessage(MessageTraumaStatusSync.HandlerClient.class, MessageTraumaStatusSync.class, messageId++, Side.CLIENT);
+	}
+
+	@Mod.EventHandler
+	public void postInit(FMLPostInitializationEvent event)
+	{
+		proxy.postInit();
 	}
 
 	@Mod.EventHandler
