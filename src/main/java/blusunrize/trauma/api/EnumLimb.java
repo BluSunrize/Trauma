@@ -1,14 +1,16 @@
+/*
+ * BluSunrize
+ * Copyright (c) 2017
+ *
+ * This code is licensed under "Blu's License of Common Sense"
+ * Details can be found in the license file in the root folder of this project
+ */
 package blusunrize.trauma.api;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumHandSide;
 
 /**
- * This code is licensed under "Blu's License of Common Sense"
- * Details can be found in the license file in the root folder of this project
- * <p>
- * Copyright:
- *
  * @author BluSunrize
  * @since 20.09.2017
  */
@@ -34,10 +36,24 @@ public enum EnumLimb
 		return "desc.trauma.limb."+name();
 	}
 
+	/**
+	 * @param player used for mirroring of dominant hand
+	 * @return the area of the default player Inventory to highlight
+	 */
 	public int[] getGuiRectangle(EntityPlayer player)
 	{
 		if(player.getPrimaryHand()==EnumHandSide.LEFT&&(this==ARM_MAIN||this==ARM_OFFHAND))
-			return this==ARM_MAIN?ARM_OFFHAND.guiRetangle: ARM_MAIN.guiRetangle;
+			return getOpposite().guiRetangle;
 		return guiRetangle;
+	}
+
+	/**
+	 * Only works with arms and legs
+	 *
+	 * @return the opposite side limb
+	 */
+	public EnumLimb getOpposite()
+	{
+		return this==ARM_MAIN?ARM_OFFHAND: this==ARM_OFFHAND?ARM_MAIN: this==LEG_LEFT?LEG_RIGHT: this==LEG_RIGHT?LEG_LEFT: null;
 	}
 }
