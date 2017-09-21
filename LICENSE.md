@@ -16,6 +16,7 @@ As such, this is my custom license which should hopefully cover all that:
 - Claim any of this code to be your property
 - Redistribute this project (source or compiled) without explicit permission of the license holder, BluSunrize
 - Copy large sections of this code (classes, complex methods) without giving credit
+- Monetize any of this project. This means selling the code, compiled projects and also forbids the use of paywalls or "donations" to restrict access to any part of the project's content. I specifically exempt CurseForge's "Points"-system from this statement.
 
 #### What you *have to* abide by:
 - Have any projects based on this be visible source. It helps others learn just as this helped you.
@@ -25,6 +26,11 @@ As such, this is my custom license which should hopefully cover all that:
 - Always give credit to original artists
 - Always ask for permission before copying assets
 - Addons mods are allowed to use and remix art assets for the sole purpose of being addons. When in doubt, better ask.
+
+#### Contributing to this repository:
+- The original author keeps copyright of their contibuted code and resources
+- The owner of this repository is given rights to usage and modification of the contributed code or resource. This may not be withdrawn
+- Any code or resource submitted must be licensed to this project with this license
 
 #### In summary:
 Please, look at the code and learn from it (where possible). Draw inspiration, be creative, enjoy yourself. Should you find issues, point them out. Have an idea how to fix it? Submit a PR.
