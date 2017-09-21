@@ -19,7 +19,7 @@ As such, this is my custom license which should hopefully cover all that:
 - Monetize any of this project. This means selling the code, compiled projects and also forbids the use of paywalls or "donations" to restrict access to any part of the project's content. I specifically exempt CurseForge's "Points"-system from this statement.
 
 #### What you *have to* abide by:
-- Have any projects based on this be visible source. It helps others learn just as this helped you.
+- If you have used any code from this project (with the exception of API classes), that project must also be visible source. This allows others to learn from your work.
 - Give proper credit where it's due when copying copy (see above)
 
 #### On the topic of *resources*:
@@ -35,6 +35,8 @@ As such, this is my custom license which should hopefully cover all that:
 #### In summary:
 Please, look at the code and learn from it (where possible). Draw inspiration, be creative, enjoy yourself. Should you find issues, point them out. Have an idea how to fix it? Submit a PR.
 Stealing code or assets isn't cool though. Don't do that.
+
+For any questions on this license, go poke me on twitter, @BluSunrize.
 
 Lastly, I hereby reserve the right to revoke this license's permissions from people who violate [Wheaton's Law](http://www.wheatonslaw.com).
 
