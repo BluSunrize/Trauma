@@ -1,3 +1,10 @@
+/*
+ * BluSunrize
+ * Copyright (c) 2017
+ *
+ * This code is licensed under "Blu's License of Common Sense"
+ * Details can be found in the license file in the root folder of this project
+ */
 package blusunrize.trauma.common;
 
 import blusunrize.trauma.api.CapabilityTrauma;
@@ -16,11 +23,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 
 /**
- * This code is licensed under "Blu's License of Common Sense"
- * Details can be found in the license file in the root folder of this project
- * <p>
- * Copyright:
- *
  * @author BluSunrize
  * @since 20.09.2017
  */

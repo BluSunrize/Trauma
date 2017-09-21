@@ -1,3 +1,10 @@
+/*
+ * BluSunrize
+ * Copyright (c) 2017
+ *
+ * This code is licensed under "Blu's License of Common Sense"
+ * Details can be found in the license file in the root folder of this project
+ */
 package blusunrize.trauma.common.utils.commands;
 
 import blusunrize.trauma.api.CapabilityTrauma;
@@ -15,11 +22,6 @@ import net.minecraft.util.text.TextComponentString;
 import java.util.Arrays;
 
 /**
- * This code is licensed under "Blu's License of Common Sense"
- * Details can be found in the license file in the root folder of this project
- * <p>
- * Copyright:
- *
  * @author BluSunrize
  * @since 20.09.2017
  */
@@ -60,13 +62,13 @@ public class CommandTrauma extends CommandBase
 				try
 				{
 					EnumLimb limb = EnumLimb.valueOf(args[1].toUpperCase());
-					int state = Integer.parseInt(args[2].replaceAll("\\D",""));
-					if(limb!=null && state>=0&&state<EnumTraumaState.values().length)
+					int state = Integer.parseInt(args[2].replaceAll("\\D", ""));
+					if(limb!=null&&state >= 0&&state < EnumTraumaState.values().length)
 					{
 						System.out.println("Setting status of "+limb+" to "+state);
 						status.getLimbStatus(limb).setState(EnumTraumaState.values()[state]);
 					}
-				}catch(Exception e)
+				} catch(Exception e)
 				{
 					e.printStackTrace();
 				}
