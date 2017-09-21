@@ -10,7 +10,7 @@ As such, this is my custom license which should hopefully cover all that:
 - Look at the code, draw inspiration, copy bits of it to use in your own projects
 - Fork this repository and modify its code
 - Submit Pull Requests to this repository
-- Write other projects that baes on this project and its API (if present) (This means Addons are totally cool)
+- Write other projects that base on this project and its API (if present) (This means Addons are totally cool)
 
 #### What you *can not* do:
 - Claim any of this code to be your property
@@ -37,6 +37,9 @@ Please, look at the code and learn from it (where possible). Draw inspiration, b
 Stealing code or assets isn't cool though. Don't do that.
 
 For any questions on this license, go poke me on twitter, @BluSunrize.
+
+This project is provided "as is", without warranty of any kind, including but not limited to the warranties of merchantability, fitness for a particular purpose or non-infringement.
+The authors or copyright holders are not liable for any claim, damages or other liability, whether in actions of contract, tort or other, arising from, out of or in connection to this project, its use, or related projects.
 
 Lastly, I hereby reserve the right to revoke this license's permissions from people who violate [Wheaton's Law](http://www.wheatonslaw.com).
 
