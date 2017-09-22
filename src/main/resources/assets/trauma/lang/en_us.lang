@@ -38,3 +38,10 @@ desc.trauma.limb.LEG_RIGHT.state.HEAVY=
 desc.trauma.useItem=Rightclick to use %s on this limb
 
 chat.trauma.injury=Your %s has been %s
+
+chat.trauma.command.usage=/trauma get [player] OR /trauma set <limb> <state> [player]
+chat.trauma.command.usage.get=/trauma get [player]
+chat.trauma.command.usage.set=/trauma set <limb> <state> [player]
+chat.trauma.command.error.limb=%s is not a valid limb
+chat.trauma.command.error.state=%s is not a valid state
+chat.trauma.command.set.success=%s was set to %s

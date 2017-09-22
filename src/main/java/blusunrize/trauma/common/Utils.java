@@ -40,4 +40,15 @@ public class Utils
 			return false;
 		return !server.isDedicatedServer();
 	}
+
+	public static Enum parseEnum(String s, Class enumClass)
+	{
+		try
+		{
+			return Enum.valueOf(enumClass, s);
+		} catch(Exception e)
+		{
+			return null;
+		}
+	}
 }
