@@ -67,7 +67,7 @@ public class TraumaApiUtils
 		if(setLimbState(player, limb, newState, true))
 		{
 			if(oldState!=newState)
-				player.sendMessage(new TextComponentTranslation("chat.trauma.injury", getLocalizedLimb(limb), getLocalizedDamage(limb, newState)));
+				player.sendMessage(new TextComponentTranslation("chat.trauma.injury", new TextComponentTranslation(limb.getUnlocalizedName()), new TextComponentTranslation(getUnlocalizedDamage(limb, newState))));
 			return true;
 		}
 		return false;

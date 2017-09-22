@@ -68,7 +68,7 @@ public class EventHandler
 
 	}
 
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.LOW)
 	public void onPlayerTick(TickEvent.PlayerTickEvent event)
 	{
 		if(event.phase==Phase.END && Utils.shouldTick(event.player))
@@ -79,7 +79,7 @@ public class EventHandler
 		}
 	}
 
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void onLogin(PlayerEvent.PlayerLoggedInEvent event)
 	{
 		Utils.sendSyncPacket(event.player);
