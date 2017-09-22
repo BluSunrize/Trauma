@@ -11,6 +11,8 @@ import blusunrize.trauma.api.CapabilityTrauma;
 import blusunrize.trauma.common.utils.network.MessageTraumaStatusSync;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.server.MinecraftServer;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 /**
  * @author BluSunrize
@@ -22,5 +24,20 @@ public class Utils
 	{
 		if(!player.world.isRemote && player instanceof EntityPlayerMP)
 			Trauma.packetHandler.sendTo(new MessageTraumaStatusSync(player, player.getCapability(CapabilityTrauma.TRAUMA_CAPABILITY, null)), (EntityPlayerMP)player);
+	}
+
+	public static boolean shouldTick(EntityPlayer player)
+	{
+		if(!isSingleplayer())//if multiplayer
+			return true;
+		return !player.getEntityWorld().isRemote;
+	}
+
+	public static boolean isSingleplayer()
+	{
+		MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
+		if(server==null)//is client
+			return false;
+		return !server.isDedicatedServer();
 	}
 }

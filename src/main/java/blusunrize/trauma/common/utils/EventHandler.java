@@ -39,7 +39,7 @@ public class EventHandler
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void onEntityDamaged(LivingHurtEvent event)
 	{
-		if(event.isCanceled()||event.getAmount() <= 0||!(event.getEntityLiving() instanceof EntityPlayer))
+		if(event.isCanceled()||event.getAmount() <= 0||!(event.getEntityLiving() instanceof EntityPlayer) || event.getEntity().getEntityWorld().isRemote)
 			return;
 
 		EntityPlayer player = (EntityPlayer)event.getEntityLiving();
@@ -71,7 +71,7 @@ public class EventHandler
 	@SubscribeEvent
 	public void onPlayerTick(TickEvent.PlayerTickEvent event)
 	{
-		if(event.phase==Phase.END)
+		if(event.phase==Phase.END && Utils.shouldTick(event.player))
 		{
 			TraumaStatus status = event.player.getCapability(CapabilityTrauma.TRAUMA_CAPABILITY, null);
 			for(EnumLimb limb : EnumLimb.values())

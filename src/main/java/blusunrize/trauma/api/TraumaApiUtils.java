@@ -9,6 +9,7 @@ package blusunrize.trauma.api;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -61,6 +62,14 @@ public class TraumaApiUtils
 
 	public static boolean damageLimb(EntityPlayer player, EnumLimb limb, int steps)
 	{
-		return setLimbState(player, limb, getLimbState(player, limb).getWorse(steps), true);
+		EnumTraumaState oldState = getLimbState(player, limb);
+		EnumTraumaState newState = oldState.getWorse(steps);
+		if(setLimbState(player, limb, newState, true))
+		{
+			if(oldState!=newState)
+				player.sendMessage(new TextComponentTranslation("chat.trauma.injury", getLocalizedLimb(limb), getLocalizedDamage(limb, newState)));
+			return true;
+		}
+		return false;
 	}
 }
