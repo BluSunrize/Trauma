@@ -19,7 +19,7 @@ import javax.annotation.Nonnull;
  * @author BluSunrize
  * @since 21.09.2017
  */
-public class ApiUtils
+public class TraumaApiUtils
 {
 	@SideOnly(Side.CLIENT)
 	public static String getLocalizedLimb(@Nonnull EnumLimb limb)

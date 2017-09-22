@@ -7,10 +7,10 @@
  */
 package blusunrize.trauma.common.utils;
 
-import blusunrize.trauma.api.ApiUtils;
 import blusunrize.trauma.api.CapabilityTrauma;
 import blusunrize.trauma.api.EnumLimb;
-import blusunrize.trauma.common.TraumaConfig;
+import blusunrize.trauma.api.TraumaApiLib;
+import blusunrize.trauma.api.TraumaApiUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
@@ -45,17 +45,17 @@ public class EventHandler
 		DamageSource damageSource = event.getSource();
 		float amount = event.getAmount();
 
-		if(TraumaConfig.isFallDamage(damageSource))
+		if(TraumaApiLib.isFallDamage(damageSource))
 		{
 			EnumLimb leg = player.getRNG().nextBoolean()?EnumLimb.LEG_LEFT: EnumLimb.LEG_RIGHT;
 			int steps = (int)Math.ceil(amount/5);
 			if(amount > 3&&player.getRNG().nextInt(10) < amount)//Both legs, chances increase with damage
 			{
-				ApiUtils.damageLimb(player, leg, steps);
-				ApiUtils.damageLimb(player, leg.getOpposite(), steps);
+				TraumaApiUtils.damageLimb(player, leg, steps);
+				TraumaApiUtils.damageLimb(player, leg.getOpposite(), steps);
 			}
 			else if(amount >= 1)
-				ApiUtils.damageLimb(player, leg, steps);
+				TraumaApiUtils.damageLimb(player, leg, steps);
 
 			return;
 		}

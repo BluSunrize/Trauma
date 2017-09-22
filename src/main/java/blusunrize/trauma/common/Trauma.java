@@ -50,6 +50,7 @@ public class Trauma
 	public void init(FMLInitializationEvent event)
 	{
 		proxy.init();
+		TraumaConfig.loadConfig();
 		CapabilityTrauma.register();
 		MinecraftForge.EVENT_BUS.register(new EventHandler());
 
