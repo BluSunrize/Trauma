@@ -7,10 +7,7 @@
  */
 package blusunrize.trauma.common.utils;
 
-import blusunrize.trauma.api.CapabilityTrauma;
-import blusunrize.trauma.api.EnumLimb;
-import blusunrize.trauma.api.TraumaApiLib;
-import blusunrize.trauma.api.TraumaApiUtils;
+import blusunrize.trauma.api.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
@@ -18,6 +15,9 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
+import net.minecraftforge.fml.relauncher.Side;
 
 /**
  * @author BluSunrize
@@ -56,11 +56,21 @@ public class EventHandler
 			}
 			else if(amount >= 1)
 				TraumaApiUtils.damageLimb(player, leg, steps);
-
 			return;
 		}
 
 		Entity projectile = event.getSource().getImmediateSource();
 		Entity attacker = event.getSource().getTrueSource();
+	}
+
+	@SubscribeEvent
+	public void onPlayerTick(TickEvent.PlayerTickEvent event)
+	{
+		if(event.side==Side.SERVER && event.phase==Phase.END)
+		{
+			TraumaStatus status = event.player.getCapability(CapabilityTrauma.TRAUMA_CAPABILITY, null);
+			for(EnumLimb limb : EnumLimb.values())
+				status.getLimbStatus(limb).tick();
+		}
 	}
 }

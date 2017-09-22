@@ -9,7 +9,7 @@ package blusunrize.trauma.api;
 
 import net.minecraft.util.DamageSource;
 
-import java.util.HashMap;
+import javax.annotation.Nonnull;
 import java.util.Map;
 import java.util.Set;
 
@@ -29,4 +29,11 @@ public class TraumaApiLib
 	}
 
 	public static Map<EnumLimb, int[]> RECOVERY_TIMES;
+
+	public static int getRecoveryTime(@Nonnull EnumLimb limb, @Nonnull EnumTraumaState state)
+	{
+		if(state==EnumTraumaState.NONE)
+			return 0;
+		return RECOVERY_TIMES.get(limb)[state.ordinal()-1];
+	}
 }

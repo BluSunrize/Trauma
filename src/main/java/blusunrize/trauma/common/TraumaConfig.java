@@ -7,8 +7,8 @@
  */
 package blusunrize.trauma.common;
 
-import blusunrize.trauma.api.TraumaApiLib;
 import blusunrize.trauma.api.EnumLimb;
+import blusunrize.trauma.api.TraumaApiLib;
 import com.google.common.collect.Sets;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.Config.Comment;
@@ -41,8 +41,8 @@ public class TraumaConfig
 		TraumaApiLib.RECOVERY_TIMES = new HashMap<EnumLimb, int[]>()
 		{{
 			put(EnumLimb.HEAD, recovery_head);
-			put(EnumLimb.CHEST, null);
-			put(EnumLimb.ABDOMEN, null);
+			put(EnumLimb.CHEST, new int[3]);
+			put(EnumLimb.ABDOMEN, new int[3]);
 			put(EnumLimb.ARM_MAIN, recovery_arms);
 			put(EnumLimb.ARM_OFFHAND, recovery_arms);
 			put(EnumLimb.LEG_LEFT, recovery_legs);

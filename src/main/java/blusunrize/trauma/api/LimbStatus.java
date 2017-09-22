@@ -51,6 +51,12 @@ public class LimbStatus
 		this.recoveryTimer = recoveryTimer;
 	}
 
+	public void tick()
+	{
+		if(this.recoveryTimer>0 && --this.recoveryTimer<=0)
+			this.setState(EnumTraumaState.NONE);
+	}
+
 	public NBTTagCompound writeToNBT(@Nullable NBTTagCompound nbt)
 	{
 		if(nbt==null)
