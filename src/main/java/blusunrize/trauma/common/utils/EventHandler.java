@@ -8,16 +8,19 @@
 package blusunrize.trauma.common.utils;
 
 import blusunrize.trauma.api.*;
+import blusunrize.trauma.common.Trauma;
+import blusunrize.trauma.common.utils.network.MessageTraumaStatusSync;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
-import net.minecraftforge.fml.relauncher.Side;
 
 /**
  * @author BluSunrize
@@ -66,11 +69,18 @@ public class EventHandler
 	@SubscribeEvent
 	public void onPlayerTick(TickEvent.PlayerTickEvent event)
 	{
-		if(event.side==Side.SERVER && event.phase==Phase.END)
+		if(event.phase==Phase.END)
 		{
 			TraumaStatus status = event.player.getCapability(CapabilityTrauma.TRAUMA_CAPABILITY, null);
 			for(EnumLimb limb : EnumLimb.values())
 				status.getLimbStatus(limb).tick();
 		}
+	}
+
+	@SubscribeEvent
+	public void onLogin(PlayerEvent.PlayerLoggedInEvent event)
+	{
+		if(!event.player.world.isRemote && event.player instanceof EntityPlayerMP)
+			Trauma.packetHandler.sendTo(new MessageTraumaStatusSync(event.player, event.player.getCapability(CapabilityTrauma.TRAUMA_CAPABILITY, null)), (EntityPlayerMP)event.player);
 	}
 }
