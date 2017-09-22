@@ -8,11 +8,9 @@
 package blusunrize.trauma.common.utils;
 
 import blusunrize.trauma.api.*;
-import blusunrize.trauma.common.Trauma;
-import blusunrize.trauma.common.utils.network.MessageTraumaStatusSync;
+import blusunrize.trauma.common.Utils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -56,14 +54,18 @@ public class EventHandler
 			{
 				TraumaApiUtils.damageLimb(player, leg, steps);
 				TraumaApiUtils.damageLimb(player, leg.getOpposite(), steps);
+				Utils.sendSyncPacket(player);
 			}
 			else if(amount >= 1)
+			{
 				TraumaApiUtils.damageLimb(player, leg, steps);
+				Utils.sendSyncPacket(player);
+			}
 			return;
 		}
-
 		Entity projectile = event.getSource().getImmediateSource();
 		Entity attacker = event.getSource().getTrueSource();
+
 	}
 
 	@SubscribeEvent
@@ -80,7 +82,6 @@ public class EventHandler
 	@SubscribeEvent
 	public void onLogin(PlayerEvent.PlayerLoggedInEvent event)
 	{
-		if(!event.player.world.isRemote && event.player instanceof EntityPlayerMP)
-			Trauma.packetHandler.sendTo(new MessageTraumaStatusSync(event.player, event.player.getCapability(CapabilityTrauma.TRAUMA_CAPABILITY, null)), (EntityPlayerMP)event.player);
+		Utils.sendSyncPacket(event.player);
 	}
 }
