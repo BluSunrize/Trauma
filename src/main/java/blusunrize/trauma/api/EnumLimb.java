@@ -21,8 +21,8 @@ public enum EnumLimb
 	ABDOMEN(new int[]{44, 44, 14, 11}),
 	ARM_MAIN(new int[]{36, 33, 8, 22}),
 	ARM_OFFHAND(new int[]{58, 33, 8, 22}),
-	LEG_LEFT(new int[]{44, 55, 7, 22}),
-	LEG_RIGHT(new int[]{51, 55, 7, 22});
+	LEG_LEFT(new int[]{51, 55, 7, 22}),
+	LEG_RIGHT(new int[]{44, 55, 7, 22});
 
 	private final int[] guiRetangle;
 
