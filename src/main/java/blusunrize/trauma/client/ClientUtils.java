@@ -22,6 +22,6 @@ public class ClientUtils
 		long hours = minutes / 60;
 		seconds = seconds % 60;
 		minutes = minutes % 60;
-		return String.format("%02d",hours)+":"+String.format("%02d",minutes)+":"+String.format("%02d",seconds);
+		return (hours>0?String.format("%02d",hours)+":":"")+(minutes>0?String.format("%02d",minutes)+":":"")+String.format("%02d",seconds);
 	}
 }
