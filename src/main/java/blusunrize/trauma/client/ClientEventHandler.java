@@ -43,9 +43,12 @@ public class ClientEventHandler
 					EnumTraumaState traumaState = limbStatus.getState();
 					List<String> text = new ArrayList<>();
 					text.add(TextFormatting.GRAY+TraumaApiUtils.getLocalizedLimb(limb));
-					text.add(traumaState.getTextColor()+TraumaApiUtils.getLocalizedDamage(limb, traumaState)+" "+ClientUtils.ticksToFormattedTime(limbStatus.getRecoveryTimer()));
+					String formattedState = traumaState.getTextColor()+TraumaApiUtils.getLocalizedDamage(limb, traumaState);
+					if(limbStatus.getRecoveryTimer()>0)
+						formattedState += " "+ClientUtils.ticksToFormattedTime(limbStatus.getRecoveryTimer());
+					text.add(formattedState);
 					if(!held.isEmpty())
-						text.add(TextFormatting.DARK_GRAY+I18n.format("des.trauma.useItem", held.getDisplayName()));
+						text.add(TextFormatting.DARK_GRAY+I18n.format("desc.trauma.useItem", held.getDisplayName()));
 					event.getGui().drawHoveringText(text, event.getMouseX(), event.getMouseY());
 					break;
 				}
