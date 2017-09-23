@@ -7,8 +7,13 @@
  */
 package blusunrize.trauma.api;
 
+import blusunrize.trauma.api.effects.IEffectAttribute;
 import blusunrize.trauma.api.effects.ITraumaEffect;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 
 import javax.annotation.Nullable;
@@ -81,19 +86,24 @@ public class LimbCondition
 		this.effects.remove(ident);
 	}
 
-	public void clearEffects()
+	public void clearEffects(EntityPlayer player)
 	{
+		Multimap<String, AttributeModifier> attributeMap = HashMultimap.create();
+		for(ITraumaEffect effect : getEffects().values())
+			if(effect instanceof IEffectAttribute)
+				((IEffectAttribute)effect).gatherModifiers(player, this, attributeMap);
+		player.getAttributeMap().removeAttributeModifiers(attributeMap);
 		this.effects.clear();
 	}
 
 	/**
 	 * @return true, if the condition was cured
 	 */
-	public boolean tick()
+	public boolean tick(EntityPlayer player)
 	{
 		if(this.recoveryTimer>0 && --this.recoveryTimer<=0)
 		{
-			cure();
+			cure(player);
 			return true;
 		}
 		return false;
@@ -101,10 +111,12 @@ public class LimbCondition
 
 	/**
 	 * Sets the state, recovery timer and all associated effects
+	 * @param player the Player
 	 * @param state given TraumaState
 	 */
-	public void assumeState(EnumTraumaState state)
+	public void assumeState(EntityPlayer player, EnumTraumaState state)
 	{
+		this.cure(player); //Cure first to clear everything
 		this.setState(state);
 		this.setRecoveryTimer(TraumaApiLib.getRecoveryTime(limb, state));
 		for(ITraumaEffect effect : TraumaApiLib.getRegisteredEffects(getLimb(), state))
@@ -114,11 +126,11 @@ public class LimbCondition
 	/**
 	 * Cures this condition, resetting state, timer and all effects
 	 */
-	public void cure()
+	public void cure(EntityPlayer player)
 	{
 		this.setState(EnumTraumaState.NONE);
 		this.recoveryTimer = 0;
-		this.clearEffects();
+		this.clearEffects(player);
 	}
 
 	public NBTTagCompound writeToNBT(@Nullable NBTTagCompound nbt)

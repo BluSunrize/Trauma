@@ -87,7 +87,7 @@ public class EventHandler
 			for(EnumLimb limb : EnumLimb.values())
 			{
 				LimbCondition condition = status.getLimbStatus(limb);
-				Multimap<String, AttributeModifier> tempAttributeMap = HashMultimap.create();
+				condition.tick(event.player);
 				for(ITraumaEffect effect : condition.getEffects().values())
 				{
 					if(effect instanceof IEffectTicking)
@@ -95,12 +95,8 @@ public class EventHandler
 					if(effect instanceof IEffectPotion)
 						((IEffectPotion)effect).addToPotionMap(event.player, condition, potionEffectMap);
 					if(effect instanceof IEffectAttribute)
-						((IEffectAttribute)effect).gatherModifiers(event.player, condition, tempAttributeMap);
+						((IEffectAttribute)effect).gatherModifiers(event.player, condition, attributeMap);
 				}
-				if(!condition.tick())
-					attributeMap.putAll(tempAttributeMap);
-				else
-					event.player.getAttributeMap().removeAttributeModifiers(tempAttributeMap);
 			}
 			if(!potionEffectMap.isEmpty())
 				for(Map.Entry<Potion, Integer> entry : potionEffectMap.entrySet())

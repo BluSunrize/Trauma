@@ -54,7 +54,7 @@ public class TraumaApiUtils
 		{
 			TraumaStatus status = player.getCapability(CapabilityTrauma.TRAUMA_CAPABILITY, null);
 			LimbCondition limbCondition = status.getLimbStatus(limb);
-			limbCondition.assumeState(state);
+			limbCondition.assumeState(player, state);
 			return true;
 		}
 		return false;

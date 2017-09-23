@@ -73,6 +73,8 @@ public class CommandTrauma extends CommandBase
 				{
 					if(TraumaApiUtils.setLimbState(player, limb, state, true))
 					{
+						if(state==EnumTraumaState.NONE)
+
 						Utils.sendSyncPacket(player);
 						sender.sendMessage(new TextComponentTranslation("chat.trauma.command.set.success", new TextComponentTranslation(limb.getUnlocalizedName()), new TextComponentTranslation(TraumaApiUtils.getUnlocalizedDamage(limb, state))));
 					}
