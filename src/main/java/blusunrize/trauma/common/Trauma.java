@@ -12,10 +12,7 @@ import blusunrize.trauma.api.EnumLimb;
 import blusunrize.trauma.api.EnumTraumaState;
 import blusunrize.trauma.api.TraumaApiLib;
 import blusunrize.trauma.api.effects.ITraumaEffect;
-import blusunrize.trauma.common.effects.EffectAttackSpeed;
-import blusunrize.trauma.common.effects.EffectMining;
-import blusunrize.trauma.common.effects.EffectNoJump;
-import blusunrize.trauma.common.effects.EffectSlowness;
+import blusunrize.trauma.common.effects.*;
 import blusunrize.trauma.common.utils.EventHandler;
 import blusunrize.trauma.common.utils.commands.CommandTrauma;
 import blusunrize.trauma.common.utils.network.MessageTraumaStatusSync;
@@ -67,8 +64,20 @@ public class Trauma
 		packetHandler.registerMessage(MessageTraumaStatusSync.HandlerClient.class, MessageTraumaStatusSync.class, messageId++, Side.CLIENT);
 
 		/* Init all the Effects */
+		/*Chest*/
+		ITraumaEffect effect = new EffectExhaustion();
+		for(EnumTraumaState state : EnumTraumaState.DAMAGED_STATES)
+			TraumaApiLib.registerEffect(EnumLimb.CHEST, state, effect);
+		/*Arms*/
+		effect = new EffectMining();
+		ITraumaEffect effect2 = new EffectAttackSpeed();
+		for(EnumTraumaState state : EnumTraumaState.DAMAGED_STATES)
+		{
+			TraumaApiLib.registerEffect(EnumLimb.ARM_MAIN, state, effect);
+			TraumaApiLib.registerEffect(EnumLimb.ARM_MAIN, state, effect2);
+		}
 		/*Legs*/
-		ITraumaEffect effect = new EffectSlowness();
+		 effect = new EffectSlowness();
 		for(EnumTraumaState state : EnumTraumaState.DAMAGED_STATES)
 		{
 			TraumaApiLib.registerEffect(EnumLimb.LEG_LEFT, state, effect);
@@ -79,14 +88,6 @@ public class Trauma
 		{
 			TraumaApiLib.registerEffect(EnumLimb.LEG_LEFT, state, effect);
 			TraumaApiLib.registerEffect(EnumLimb.LEG_RIGHT, state, effect);
-		}
-		/*Arms*/
-		effect = new EffectMining();
-		ITraumaEffect effect2 = new EffectAttackSpeed();
-		for(EnumTraumaState state : EnumTraumaState.DAMAGED_STATES)
-		{
-			TraumaApiLib.registerEffect(EnumLimb.ARM_MAIN, state, effect);
-			TraumaApiLib.registerEffect(EnumLimb.ARM_MAIN, state, effect2);
 		}
 	}
 
