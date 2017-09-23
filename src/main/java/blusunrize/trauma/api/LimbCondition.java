@@ -89,6 +89,18 @@ public class LimbCondition
 			this.setState(EnumTraumaState.NONE);
 	}
 
+	/**
+	 * Sets the state, recovery timer and all associated effects
+	 * @param state given TraumaState
+	 */
+	public void assumeState(EnumTraumaState state)
+	{
+		this.setState(state);
+		this.setRecoveryTimer(TraumaApiLib.getRecoveryTime(limb, state));
+		for(ITraumaEffect effect : TraumaApiLib.getRegisteredEffects(getLimb(), state))
+			this.addEffect(effect);
+	}
+
 	public NBTTagCompound writeToNBT(@Nullable NBTTagCompound nbt)
 	{
 		if(nbt==null)

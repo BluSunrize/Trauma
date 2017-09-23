@@ -40,8 +40,8 @@ public class TraumaStatus implements INBTSerializable<NBTTagCompound>
 	{
 		NBTTagCompound nbt = new NBTTagCompound();
 		NBTTagList limbs = new NBTTagList();
-		for(LimbCondition status : limbMap.values())
-			limbs.appendTag(status.writeToNBT(null));
+		for(LimbCondition condition : limbMap.values())
+			limbs.appendTag(condition.writeToNBT(null));
 		nbt.setTag("limbMap", limbs);
 		return nbt;
 	}
