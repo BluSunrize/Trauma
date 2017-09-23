@@ -36,14 +36,14 @@ public class TraumaApiLib
 		return damageSource!=null && FALL_DAMAGES.contains(damageSource.damageType);
 	}
 
-	public static Map<EnumLimb, long[]> RECOVERY_TIMES;
+	public static Map<EnumLimb, int[]> RECOVERY_TIMES;
 
 	/**
 	 * @param limb the queried limh
 	 * @param state the state of the queried limb
 	 * @return the recovery time. Long because it may very well be a long time
 	 */
-	public static long getRecoveryTime(@Nonnull EnumLimb limb, @Nonnull EnumTraumaState state)
+	public static int getRecoveryTime(@Nonnull EnumLimb limb, @Nonnull EnumTraumaState state)
 	{
 		if(state==EnumTraumaState.NONE)
 			return 0;
