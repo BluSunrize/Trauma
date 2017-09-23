@@ -7,6 +7,8 @@
  */
 package blusunrize.trauma.api.effects;
 
+import blusunrize.trauma.api.LimbCondition;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 
 import java.util.HashMap;
@@ -20,7 +22,9 @@ import java.util.HashMap;
 public interface IEffectPotion
 {
 	/**
+	 * @param player injured player
+	 * @param limbCondition the condition which has this effect applied
 	 * @param map A map of Potion->Amplifier, increase if potion is already present
 	 */
-	void addToPotionMap(HashMap<Potion,Integer> map);
+	void addToPotionMap(EntityPlayer player, LimbCondition limbCondition, HashMap<Potion, Integer> map);
 }

@@ -7,9 +7,11 @@
  */
 package blusunrize.trauma.api;
 
+import blusunrize.trauma.api.effects.ITraumaEffect;
 import net.minecraft.nbt.NBTTagCompound;
 
 import javax.annotation.Nullable;
+import java.util.HashMap;
 
 /**
  * @author BluSunrize
@@ -20,6 +22,7 @@ public class LimbCondition
 	private final EnumLimb limb;
 	private EnumTraumaState state = EnumTraumaState.NONE;
 	private long recoveryTimer;
+	private HashMap<String, ITraumaEffect> effects;
 
 	public LimbCondition(EnumLimb limb)
 	{
@@ -51,6 +54,31 @@ public class LimbCondition
 		this.recoveryTimer = recoveryTimer;
 	}
 
+	public HashMap<String, ITraumaEffect> getEffects()
+	{
+		return effects;
+	}
+
+	public void addEffect(ITraumaEffect effect)
+	{
+		this.effects.put(effect.getIndentifier(), effect);
+	}
+
+	public boolean hasEffect(String ident)
+	{
+		return this.effects.containsKey(ident);
+	}
+
+	public void removeEffect(String ident)
+	{
+		this.effects.remove(ident);
+	}
+
+	public void clearEffects()
+	{
+		this.effects.clear();
+	}
+
 	public void tick()
 	{
 		if(this.recoveryTimer>0 && --this.recoveryTimer<=0)
@@ -70,9 +98,11 @@ public class LimbCondition
 	public static LimbCondition readFromNBT(NBTTagCompound nbt)
 	{
 		EnumLimb limb = EnumLimb.values()[nbt.getInteger("limb")];
-		LimbCondition status = new LimbCondition(limb);
-		status.setState(EnumTraumaState.values()[nbt.getInteger("state")]);
-		status.setRecoveryTimer(nbt.getLong("recoveryTimer"));
-		return status;
+		LimbCondition limbCondition = new LimbCondition(limb);
+		limbCondition.setState(EnumTraumaState.values()[nbt.getInteger("state")]);
+		limbCondition.setRecoveryTimer(nbt.getLong("recoveryTimer"));
+		for(ITraumaEffect effect : TraumaApiLib.getRegisteredEffects(limbCondition.getLimb(), limbCondition.getState()))
+			limbCondition.addEffect(effect);
+		return limbCondition;
 	}
 }

@@ -21,7 +21,7 @@ public interface IEffectTicking extends ITraumaEffect
 	/**
 	 * Called every tick
 	 * @param player injured player
-	 * @param limbCondition
+	 * @param limbCondition the condition which has this effect applied
 	 */
 	void tick(EntityPlayer player, LimbCondition limbCondition);
 }

@@ -7,6 +7,11 @@
  */
 package blusunrize.trauma.api.effects;
 
+import blusunrize.trauma.api.LimbCondition;
+import net.minecraft.entity.player.EntityPlayer;
+
+import javax.annotation.Nonnull;
+
 /**
  * General interface for any effects caused by injured lims
  *
@@ -18,5 +23,12 @@ public interface ITraumaEffect
 	/**
 	 * @return a unique identifier for this effect. Allows easy checks if an effect is present
 	 */
+	@Nonnull
 	String getIndentifier();
+
+	/**
+	 * @return Description of effects for hovering over in GUI
+	 */
+	@Nonnull
+	String getDescription(EntityPlayer player, LimbCondition limbCondition);
 }
