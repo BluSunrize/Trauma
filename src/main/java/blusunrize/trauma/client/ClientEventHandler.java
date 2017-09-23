@@ -8,6 +8,7 @@
 package blusunrize.trauma.client;
 
 import blusunrize.trauma.api.*;
+import blusunrize.trauma.api.effects.ITraumaEffect;
 import blusunrize.trauma.common.Trauma;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.resources.I18n;
@@ -47,6 +48,9 @@ public class ClientEventHandler
 					if(limbCondition.getRecoveryTimer()>0)
 						formattedState += " "+ClientUtils.ticksToFormattedTime(limbCondition.getRecoveryTimer());
 					text.add(formattedState);
+					for(ITraumaEffect effect : limbCondition.getEffects().values())
+						text.add(" "+TextFormatting.DARK_GRAY+I18n.format(effect.getDescription(player, limbCondition)));
+
 					if(!held.isEmpty())
 						text.add(TextFormatting.DARK_GRAY+I18n.format("desc.trauma.useItem", held.getDisplayName()));
 					event.getGui().drawHoveringText(text, event.getMouseX(), event.getMouseY());

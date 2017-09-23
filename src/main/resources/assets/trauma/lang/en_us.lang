@@ -30,16 +30,16 @@ desc.trauma.limb.ARM_OFFHAND.state.MEDIUM=Broken
 desc.trauma.limb.ARM_OFFHAND.state.HEAVY=Maimed
 desc.trauma.limb.LEG_LEFT.state.LIGHT=Sprained
 desc.trauma.limb.LEG_LEFT.state.MEDIUM=Broken
-desc.trauma.limb.LEG_LEFT.state.HEAVY=
+desc.trauma.limb.LEG_LEFT.state.HEAVY=Maimed
 desc.trauma.limb.LEG_RIGHT.state.LIGHT=Sprained
 desc.trauma.limb.LEG_RIGHT.state.MEDIUM=Broken
-desc.trauma.limb.LEG_RIGHT.state.HEAVY=
+desc.trauma.limb.LEG_RIGHT.state.HEAVY=Maimed
 
 desc.trauma.effect.slowness.0=Slowness
 desc.trauma.effect.slowness.1=Slowness II
 desc.trauma.effect.slowness.2=Slowness III
-desc.trauma.effect.nojump.1=-25% Jumpheight
-desc.trauma.effect.nojump.2=-50% Jumpheight
+desc.trauma.effect.nojump.1=-25%% Jumpheight
+desc.trauma.effect.nojump.2=-50%% Jumpheight
 
 desc.trauma.useItem=Rightclick to use %s on this limb
 
