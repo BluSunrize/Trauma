@@ -100,7 +100,9 @@ public class EventHandler
 				for(Map.Entry<Potion, Integer> entry : potionEffectMap.entrySet())
 					if(entry.getValue()>=1)
 					{
-						event.player.addPotionEffect(new PotionEffect(entry.getKey(), 200, entry.getValue()-1, false, false));
+						PotionEffect effect = event.player.getActivePotionEffect(entry.getKey());
+						if(effect.getDuration()<=20)//Reset potion effects only when they get low
+							event.player.addPotionEffect(new PotionEffect(entry.getKey(), 80, entry.getValue()-1, false, false));
 					}
 		}
 	}
