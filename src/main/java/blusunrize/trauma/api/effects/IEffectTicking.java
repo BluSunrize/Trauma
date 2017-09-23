@@ -10,12 +10,15 @@ package blusunrize.trauma.api.effects;
 import blusunrize.trauma.api.LimbCondition;
 import net.minecraft.entity.player.EntityPlayer;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
 /**
  * A trauma effect designed for things that need to be applied every tick
  *
  * @author BluSunrize
  * @since 23.09.2017
  */
+@ParametersAreNonnullByDefault
 public interface IEffectTicking extends ITraumaEffect
 {
 	/**

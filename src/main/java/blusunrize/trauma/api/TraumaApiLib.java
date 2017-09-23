@@ -9,10 +9,12 @@ package blusunrize.trauma.api;
 
 import blusunrize.trauma.api.effects.ITraumaEffect;
 import com.google.common.collect.ArrayListMultimap;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.util.DamageSource;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
-import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -23,6 +25,8 @@ import java.util.Set;
  * @author BluSunrize
  * @since 22.09.2017
  */
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 public class TraumaApiLib
 {
 	public static Set<String> FALL_DAMAGES;
@@ -31,7 +35,7 @@ public class TraumaApiLib
 	 * @param damageSource given damagesource
 	 * @return true, if the source is to be considered fall damage
 	 */
-	public static boolean isFallDamage(DamageSource damageSource)
+	public static boolean isFallDamage(@Nullable DamageSource damageSource)
 	{
 		return damageSource!=null && FALL_DAMAGES.contains(damageSource.damageType);
 	}
@@ -43,7 +47,7 @@ public class TraumaApiLib
 	 * @param state the state of the queried limb
 	 * @return the recovery time. Long because it may very well be a long time
 	 */
-	public static int getRecoveryTime(@Nonnull EnumLimb limb, @Nonnull EnumTraumaState state)
+	public static int getRecoveryTime(EnumLimb limb, EnumTraumaState state)
 	{
 		if(state==EnumTraumaState.NONE)
 			return 0;

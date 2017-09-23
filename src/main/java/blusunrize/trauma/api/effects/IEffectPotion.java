@@ -11,6 +11,7 @@ import blusunrize.trauma.api.LimbCondition;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.HashMap;
 
 /**
@@ -19,6 +20,7 @@ import java.util.HashMap;
  * @author BluSunrize
  * @since 23.09.2017
  */
+@ParametersAreNonnullByDefault
 public interface IEffectPotion
 {
 	/**

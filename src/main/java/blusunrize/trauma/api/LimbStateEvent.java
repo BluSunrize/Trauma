@@ -7,15 +7,20 @@
  */
 package blusunrize.trauma.api;
 
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.eventhandler.Cancelable;
+
+import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * @author BluSunrize
  * @since 21.09.2017
  */
 @Cancelable
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 public class LimbStateEvent extends PlayerEvent
 {
 	private EnumLimb limb;

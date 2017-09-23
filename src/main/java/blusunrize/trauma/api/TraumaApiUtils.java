@@ -14,21 +14,22 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * @author BluSunrize
  * @since 21.09.2017
  */
+@ParametersAreNonnullByDefault
 public class TraumaApiUtils
 {
 	@SideOnly(Side.CLIENT)
-	public static String getLocalizedLimb(@Nonnull EnumLimb limb)
+	public static String getLocalizedLimb(EnumLimb limb)
 	{
 		return I18n.format(limb.getUnlocalizedName());
 	}
 
-	public static String getUnlocalizedDamage(@Nonnull EnumLimb limb, @Nonnull EnumTraumaState state)
+	public static String getUnlocalizedDamage(EnumLimb limb, EnumTraumaState state)
 	{
 		if(state==EnumTraumaState.NONE)
 			return "desc.trauma.state."+state.name();
@@ -36,7 +37,7 @@ public class TraumaApiUtils
 	}
 
 	@SideOnly(Side.CLIENT)
-	public static String getLocalizedDamage(@Nonnull EnumLimb limb, @Nonnull EnumTraumaState state)
+	public static String getLocalizedDamage(EnumLimb limb, EnumTraumaState state)
 	{
 		return I18n.format(getUnlocalizedDamage(limb, state));
 	}

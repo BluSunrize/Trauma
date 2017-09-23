@@ -7,12 +7,14 @@
  */
 package blusunrize.trauma.api;
 
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.util.text.TextFormatting;
 
 /**
  * @author BluSunrize
  * @since 20.09.2017
  */
+@MethodsReturnNonnullByDefault
 public enum EnumTraumaState
 {
 	NONE(TextFormatting.GRAY),

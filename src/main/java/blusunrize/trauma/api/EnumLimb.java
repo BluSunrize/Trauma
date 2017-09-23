@@ -7,13 +7,17 @@
  */
 package blusunrize.trauma.api;
 
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumHandSide;
+
+import javax.annotation.Nonnull;
 
 /**
  * @author BluSunrize
  * @since 20.09.2017
  */
+@MethodsReturnNonnullByDefault
 public enum EnumLimb
 {
 	HEAD(new int[]{44, 19, 14, 14}),
@@ -40,7 +44,7 @@ public enum EnumLimb
 	 * @param player used for mirroring of dominant hand
 	 * @return the area of the default player Inventory to highlight
 	 */
-	public int[] getGuiRectangle(EntityPlayer player)
+	public int[] getGuiRectangle(@Nonnull EntityPlayer player)
 	{
 		if(player.getPrimaryHand()==EnumHandSide.LEFT&&(this==ARM_MAIN||this==ARM_OFFHAND))
 			return getOpposite().guiRetangle;

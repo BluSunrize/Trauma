@@ -8,21 +8,25 @@
 package blusunrize.trauma.api;
 
 import blusunrize.trauma.api.effects.ITraumaEffect;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.nbt.NBTTagCompound;
 
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.HashMap;
 
 /**
  * @author BluSunrize
  * @since 20.09.2017
  */
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 public class LimbCondition
 {
 	private final EnumLimb limb;
 	private EnumTraumaState state = EnumTraumaState.NONE;
 	private long recoveryTimer;
-	private HashMap<String, ITraumaEffect> effects;
+	private HashMap<String, ITraumaEffect> effects = new HashMap<>();
 
 	public LimbCondition(EnumLimb limb)
 	{

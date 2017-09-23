@@ -7,10 +7,12 @@
  */
 package blusunrize.trauma.api;
 
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.util.INBTSerializable;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,6 +20,8 @@ import java.util.Map;
  * @author BluSunrize
  * @since 20.09.2017
  */
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 public class TraumaStatus implements INBTSerializable<NBTTagCompound>
 {
 	private final Map<EnumLimb, LimbCondition> limbMap = new HashMap<EnumLimb, LimbCondition>()
