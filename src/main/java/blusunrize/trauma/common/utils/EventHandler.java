@@ -8,17 +8,26 @@
 package blusunrize.trauma.common.utils;
 
 import blusunrize.trauma.api.*;
+import blusunrize.trauma.api.effects.IEffectPotion;
+import blusunrize.trauma.api.effects.IEffectTicking;
+import blusunrize.trauma.api.effects.ITraumaEffect;
+import blusunrize.trauma.api.effects.PotionEffectMap;
 import blusunrize.trauma.common.Utils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
+
+import java.util.Map;
 
 /**
  * @author BluSunrize
@@ -74,8 +83,25 @@ public class EventHandler
 		if(event.phase==Phase.END && Utils.shouldTick(event.player))
 		{
 			TraumaStatus status = event.player.getCapability(CapabilityTrauma.TRAUMA_CAPABILITY, null);
+			PotionEffectMap potionEffectMap = new PotionEffectMap();
 			for(EnumLimb limb : EnumLimb.values())
-				status.getLimbStatus(limb).tick();
+			{
+				LimbCondition condition = status.getLimbStatus(limb);
+				condition.tick();
+				for(ITraumaEffect effect : condition.getEffects().values())
+				{
+					if(effect instanceof IEffectTicking)
+						((IEffectTicking)effect).tick(event.player, condition);
+					if(effect instanceof IEffectPotion)
+						((IEffectPotion)effect).addToPotionMap(event.player, condition, potionEffectMap);
+				}
+			}
+			if(!potionEffectMap.isEmpty())
+				for(Map.Entry<Potion, Integer> entry : potionEffectMap.entrySet())
+					if(entry.getValue()>=1)
+					{
+						event.player.addPotionEffect(new PotionEffect(entry.getKey(), 200, entry.getValue()-1, false, false));
+					}
 		}
 	}
 
@@ -83,5 +109,21 @@ public class EventHandler
 	public void onLogin(PlayerEvent.PlayerLoggedInEvent event)
 	{
 		Utils.sendSyncPacket(event.player);
+	}
+
+	@SubscribeEvent
+	public void onLivingJump(LivingJumpEvent event)
+	{
+//		Migrate to effect
+//		if(event.getEntityLiving() instanceof EntityPlayer)
+//		{
+//			EntityPlayer player = (EntityPlayer)event.getEntityLiving();
+//			TraumaStatus status = player.getCapability(CapabilityTrauma.TRAUMA_CAPABILITY, null);
+//
+//			if(status.getLimbStatus(EnumLimb.LEG_LEFT).getState().ordinal()>1 || status.getLimbStatus(EnumLimb.LEG_RIGHT).getState().ordinal()>1)//broken legs or worse
+//			{
+//				player.motionY = 0;
+//			}
+//		}
 	}
 }

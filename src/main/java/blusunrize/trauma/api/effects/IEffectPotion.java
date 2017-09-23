@@ -9,10 +9,8 @@ package blusunrize.trauma.api.effects;
 
 import blusunrize.trauma.api.LimbCondition;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.potion.Potion;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.HashMap;
 
 /**
  * A trauma effect designed for constantly upkept potion effects
@@ -21,12 +19,12 @@ import java.util.HashMap;
  * @since 23.09.2017
  */
 @ParametersAreNonnullByDefault
-public interface IEffectPotion
+public interface IEffectPotion extends ITraumaEffect
 {
 	/**
 	 * @param player injured player
 	 * @param limbCondition the condition which has this effect applied
 	 * @param map A map of Potion->Amplifier, increase if potion is already present
 	 */
-	void addToPotionMap(EntityPlayer player, LimbCondition limbCondition, HashMap<Potion, Integer> map);
+	void addToPotionMap(EntityPlayer player, LimbCondition limbCondition, PotionEffectMap map);
 }

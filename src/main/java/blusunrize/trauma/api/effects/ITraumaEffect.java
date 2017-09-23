@@ -29,7 +29,7 @@ public interface ITraumaEffect
 	String getIndentifier();
 
 	/**
-	 * @return Description of effects for hovering over in GUI
+	 * @return Description of effects for hovering over in GUI, may be unlocalized String
 	 */
 	String getDescription(EntityPlayer player, LimbCondition limbCondition);
 }

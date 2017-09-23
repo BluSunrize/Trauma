@@ -24,6 +24,8 @@ public enum EnumTraumaState
 
 	private final TextFormatting textColor;
 
+	public static final EnumTraumaState[] DAMAGED_STATES = {LIGHT, MEDIUM, HEAVY};
+
 	EnumTraumaState(TextFormatting textColor)
 	{
 		this.textColor = textColor;

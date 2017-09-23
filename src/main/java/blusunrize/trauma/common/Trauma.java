@@ -8,6 +8,10 @@
 package blusunrize.trauma.common;
 
 import blusunrize.trauma.api.CapabilityTrauma;
+import blusunrize.trauma.api.EnumLimb;
+import blusunrize.trauma.api.EnumTraumaState;
+import blusunrize.trauma.api.TraumaApiLib;
+import blusunrize.trauma.common.effects.EffectSlowness;
 import blusunrize.trauma.common.utils.EventHandler;
 import blusunrize.trauma.common.utils.commands.CommandTrauma;
 import blusunrize.trauma.common.utils.network.MessageTraumaStatusSync;
@@ -57,6 +61,14 @@ public class Trauma
 		int messageId = 0;
 		packetHandler.registerMessage(MessageTraumaStatusSync.HandlerServer.class, MessageTraumaStatusSync.class, messageId++, Side.SERVER);
 		packetHandler.registerMessage(MessageTraumaStatusSync.HandlerClient.class, MessageTraumaStatusSync.class, messageId++, Side.CLIENT);
+
+		/* Init all the Effects */
+		EffectSlowness slowness = new EffectSlowness();
+		for(EnumTraumaState state : EnumTraumaState.DAMAGED_STATES)
+		{
+			TraumaApiLib.registerEffect(EnumLimb.LEG_LEFT, state, slowness);
+			TraumaApiLib.registerEffect(EnumLimb.LEG_RIGHT, state, slowness);
+		}
 	}
 
 	@Mod.EventHandler
