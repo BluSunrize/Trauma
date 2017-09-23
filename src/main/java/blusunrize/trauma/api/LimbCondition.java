@@ -16,6 +16,9 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.HashMap;
 
 /**
+ * A class representing the condition of a limb<br>
+ * Stores limb, state, recovery timer and all applied ITraumaEffects
+ *
  * @author BluSunrize
  * @since 20.09.2017
  */
@@ -86,7 +89,7 @@ public class LimbCondition
 	public void tick()
 	{
 		if(this.recoveryTimer>0 && --this.recoveryTimer<=0)
-			this.setState(EnumTraumaState.NONE);
+			cure();
 	}
 
 	/**
@@ -99,6 +102,16 @@ public class LimbCondition
 		this.setRecoveryTimer(TraumaApiLib.getRecoveryTime(limb, state));
 		for(ITraumaEffect effect : TraumaApiLib.getRegisteredEffects(getLimb(), state))
 			this.addEffect(effect);
+	}
+
+	/**
+	 * Cures this condition, resetting state, timer and all effects
+	 */
+	public void cure()
+	{
+		this.setState(EnumTraumaState.NONE);
+		this.recoveryTimer = 0;
+		this.clearEffects();
 	}
 
 	public NBTTagCompound writeToNBT(@Nullable NBTTagCompound nbt)
