@@ -41,9 +41,12 @@ desc.trauma.effect.slowness.2=Slowness III
 desc.trauma.effect.nojump.1=-25%% Jumpheight
 desc.trauma.effect.nojump.2=-50%% Jumpheight
 
-desc.trauma.effect.mining.0=-32% Mining Speed
-desc.trauma.effect.mining.1=-64% Mining Speed
-desc.trauma.effect.mining.2=-96% Mining Speed
+desc.trauma.effect.mining.0=-32%% Mining Speed
+desc.trauma.effect.mining.1=-64%% Mining Speed
+desc.trauma.effect.mining.2=-96%% Mining Speed
+desc.trauma.effect.attackspeed.0=-16%% Attack Speed
+desc.trauma.effect.attackspeed.1=-40%% Attack Speed
+desc.trauma.effect.attackspeed.2=-64%% Attack Speed
 
 desc.trauma.useItem=Rightclick to use %s on this limb
 

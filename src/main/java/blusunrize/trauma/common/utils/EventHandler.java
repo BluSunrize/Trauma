@@ -8,12 +8,12 @@
 package blusunrize.trauma.common.utils;
 
 import blusunrize.trauma.api.*;
-import blusunrize.trauma.api.effects.IEffectPotion;
-import blusunrize.trauma.api.effects.IEffectTicking;
-import blusunrize.trauma.api.effects.ITraumaEffect;
-import blusunrize.trauma.api.effects.PotionEffectMap;
+import blusunrize.trauma.api.effects.*;
 import blusunrize.trauma.common.Utils;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -83,17 +83,24 @@ public class EventHandler
 		{
 			TraumaStatus status = event.player.getCapability(CapabilityTrauma.TRAUMA_CAPABILITY, null);
 			PotionEffectMap potionEffectMap = new PotionEffectMap();
+			Multimap<String, AttributeModifier> attributeMap = HashMultimap.create();
 			for(EnumLimb limb : EnumLimb.values())
 			{
 				LimbCondition condition = status.getLimbStatus(limb);
-				condition.tick();
+				Multimap<String, AttributeModifier> tempAttributeMap = HashMultimap.create();
 				for(ITraumaEffect effect : condition.getEffects().values())
 				{
 					if(effect instanceof IEffectTicking)
 						((IEffectTicking)effect).tick(event.player, condition);
 					if(effect instanceof IEffectPotion)
 						((IEffectPotion)effect).addToPotionMap(event.player, condition, potionEffectMap);
+					if(effect instanceof IEffectAttribute)
+						((IEffectAttribute)effect).gatherModifiers(event.player, condition, tempAttributeMap);
 				}
+				if(!condition.tick())
+					attributeMap.putAll(tempAttributeMap);
+				else
+					event.player.getAttributeMap().removeAttributeModifiers(tempAttributeMap);
 			}
 			if(!potionEffectMap.isEmpty())
 				for(Map.Entry<Potion, Integer> entry : potionEffectMap.entrySet())
@@ -103,6 +110,8 @@ public class EventHandler
 						if(effect==null || effect.getDuration()<=20)//Reset potion effects only when they get low
 							event.player.addPotionEffect(new PotionEffect(entry.getKey(), 80, entry.getValue()-1, false, false));
 					}
+			if(!attributeMap.isEmpty())
+				event.player.getAttributeMap().applyAttributeModifiers(attributeMap);
 		}
 	}
 

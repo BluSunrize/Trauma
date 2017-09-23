@@ -17,7 +17,7 @@ import java.util.HashMap;
 
 /**
  * A class representing the condition of a limb<br>
- * Stores limb, state, recovery timer and all applied ITraumaEffects
+ * Stores limb, state, recovery timer and all applied TraumaEffects
  *
  * @author BluSunrize
  * @since 20.09.2017
@@ -86,10 +86,17 @@ public class LimbCondition
 		this.effects.clear();
 	}
 
-	public void tick()
+	/**
+	 * @return true, if the condition was cured
+	 */
+	public boolean tick()
 	{
 		if(this.recoveryTimer>0 && --this.recoveryTimer<=0)
+		{
 			cure();
+			return true;
+		}
+		return false;
 	}
 
 	/**

@@ -12,6 +12,7 @@ import blusunrize.trauma.api.EnumLimb;
 import blusunrize.trauma.api.EnumTraumaState;
 import blusunrize.trauma.api.TraumaApiLib;
 import blusunrize.trauma.api.effects.ITraumaEffect;
+import blusunrize.trauma.common.effects.EffectAttackSpeed;
 import blusunrize.trauma.common.effects.EffectMining;
 import blusunrize.trauma.common.effects.EffectNoJump;
 import blusunrize.trauma.common.effects.EffectSlowness;
@@ -81,8 +82,12 @@ public class Trauma
 		}
 		/*Arms*/
 		effect = new EffectMining();
+		ITraumaEffect effect2 = new EffectAttackSpeed();
 		for(EnumTraumaState state : EnumTraumaState.DAMAGED_STATES)
+		{
 			TraumaApiLib.registerEffect(EnumLimb.ARM_MAIN, state, effect);
+			TraumaApiLib.registerEffect(EnumLimb.ARM_MAIN, state, effect2);
+		}
 	}
 
 	@Mod.EventHandler

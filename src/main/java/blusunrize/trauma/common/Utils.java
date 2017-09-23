@@ -14,6 +14,8 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
+import java.util.UUID;
+
 /**
  * @author BluSunrize
  * @since 22.09.2017
@@ -51,4 +53,14 @@ public class Utils
 			return null;
 		}
 	}
+
+	static long UUIDBase = 109406002018L;
+	static long UUIDAdd = 01L;
+	public static UUID generateNewUUID()
+	{
+		UUID uuid = new UUID(UUIDBase,UUIDAdd);
+		UUIDAdd++;
+		return uuid;
+	}
+
 }
