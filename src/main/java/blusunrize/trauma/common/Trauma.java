@@ -11,6 +11,8 @@ import blusunrize.trauma.api.CapabilityTrauma;
 import blusunrize.trauma.api.EnumLimb;
 import blusunrize.trauma.api.EnumTraumaState;
 import blusunrize.trauma.api.TraumaApiLib;
+import blusunrize.trauma.api.effects.ITraumaEffect;
+import blusunrize.trauma.common.effects.EffectNoJump;
 import blusunrize.trauma.common.effects.EffectSlowness;
 import blusunrize.trauma.common.utils.EventHandler;
 import blusunrize.trauma.common.utils.commands.CommandTrauma;
@@ -63,11 +65,17 @@ public class Trauma
 		packetHandler.registerMessage(MessageTraumaStatusSync.HandlerClient.class, MessageTraumaStatusSync.class, messageId++, Side.CLIENT);
 
 		/* Init all the Effects */
-		EffectSlowness slowness = new EffectSlowness();
+		ITraumaEffect effect = new EffectSlowness();
 		for(EnumTraumaState state : EnumTraumaState.DAMAGED_STATES)
 		{
-			TraumaApiLib.registerEffect(EnumLimb.LEG_LEFT, state, slowness);
-			TraumaApiLib.registerEffect(EnumLimb.LEG_RIGHT, state, slowness);
+			TraumaApiLib.registerEffect(EnumLimb.LEG_LEFT, state, effect);
+			TraumaApiLib.registerEffect(EnumLimb.LEG_RIGHT, state, effect);
+		}
+		effect = new EffectNoJump();
+		for(EnumTraumaState state : EnumTraumaState.EQUAL_OR_WORSE_STATES.get(EnumTraumaState.MEDIUM))
+		{
+			TraumaApiLib.registerEffect(EnumLimb.LEG_LEFT, state, effect);
+			TraumaApiLib.registerEffect(EnumLimb.LEG_RIGHT, state, effect);
 		}
 	}
 

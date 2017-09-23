@@ -10,6 +10,8 @@ package blusunrize.trauma.api;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.util.text.TextFormatting;
 
+import java.util.HashMap;
+
 /**
  * @author BluSunrize
  * @since 20.09.2017
@@ -24,12 +26,22 @@ public enum EnumTraumaState
 
 	private final TextFormatting textColor;
 
-	public static final EnumTraumaState[] DAMAGED_STATES = {LIGHT, MEDIUM, HEAVY};
+	public static final EnumTraumaState[] DAMAGED_STATES;
+	public static final HashMap<EnumTraumaState, EnumTraumaState[]> EQUAL_OR_WORSE_STATES = new HashMap(4);
 
 	EnumTraumaState(TextFormatting textColor)
 	{
 		this.textColor = textColor;
 	}
+
+	static{
+		DAMAGED_STATES = new EnumTraumaState[]{LIGHT, MEDIUM, HEAVY};
+		EQUAL_OR_WORSE_STATES.put(NONE, new EnumTraumaState[]{NONE, LIGHT, MEDIUM, HEAVY});
+		EQUAL_OR_WORSE_STATES.put(LIGHT, new EnumTraumaState[]{LIGHT, MEDIUM, HEAVY});
+		EQUAL_OR_WORSE_STATES.put(MEDIUM, new EnumTraumaState[]{MEDIUM, HEAVY});
+		EQUAL_OR_WORSE_STATES.put(HEAVY, new EnumTraumaState[]{HEAVY});
+	}
+
 
 	public TextFormatting getTextColor()
 	{
@@ -65,5 +77,10 @@ public enum EnumTraumaState
 	public EnumTraumaState getWorse(int steps)
 	{
 		return getChanged(steps);
+	}
+
+	public int getDamageIndex()
+	{
+		return ordinal()-1;
 	}
 }

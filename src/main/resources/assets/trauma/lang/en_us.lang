@@ -38,6 +38,8 @@ desc.trauma.limb.LEG_RIGHT.state.HEAVY=
 desc.trauma.effect.slowness.0=Slowness
 desc.trauma.effect.slowness.1=Slowness II
 desc.trauma.effect.slowness.2=Slowness III
+desc.trauma.effect.nojump.1=-25% Jumpheight
+desc.trauma.effect.nojump.2=-50% Jumpheight
 
 desc.trauma.useItem=Rightclick to use %s on this limb
 

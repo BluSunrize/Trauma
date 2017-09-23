@@ -19,7 +19,6 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -111,21 +110,5 @@ public class EventHandler
 	public void onLogin(PlayerEvent.PlayerLoggedInEvent event)
 	{
 		Utils.sendSyncPacket(event.player);
-	}
-
-	@SubscribeEvent
-	public void onLivingJump(LivingJumpEvent event)
-	{
-//		Migrate to effect
-//		if(event.getEntityLiving() instanceof EntityPlayer)
-//		{
-//			EntityPlayer player = (EntityPlayer)event.getEntityLiving();
-//			TraumaStatus status = player.getCapability(CapabilityTrauma.TRAUMA_CAPABILITY, null);
-//
-//			if(status.getLimbStatus(EnumLimb.LEG_LEFT).getState().ordinal()>1 || status.getLimbStatus(EnumLimb.LEG_RIGHT).getState().ordinal()>1)//broken legs or worse
-//			{
-//				player.motionY = 0;
-//			}
-//		}
 	}
 }
