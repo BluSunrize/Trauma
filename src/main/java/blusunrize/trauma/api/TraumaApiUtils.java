@@ -52,9 +52,9 @@ public class TraumaApiUtils
 		if(!fireEvent||!MinecraftForge.EVENT_BUS.post(new LimbStateEvent(player, limb, state)))
 		{
 			TraumaStatus status = player.getCapability(CapabilityTrauma.TRAUMA_CAPABILITY, null);
-			LimbStatus limbStatus = status.getLimbStatus(limb);
-			limbStatus.setState(state);
-			limbStatus.setRecoveryTimer(TraumaApiLib.getRecoveryTime(limb, state));
+			LimbCondition limbCondition = status.getLimbStatus(limb);
+			limbCondition.setState(state);
+			limbCondition.setRecoveryTimer(TraumaApiLib.getRecoveryTime(limb, state));
 			return true;
 		}
 		return false;

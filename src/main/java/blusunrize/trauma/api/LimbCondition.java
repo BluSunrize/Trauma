@@ -15,13 +15,13 @@ import javax.annotation.Nullable;
  * @author BluSunrize
  * @since 20.09.2017
  */
-public class LimbStatus
+public class LimbCondition
 {
 	private final EnumLimb limb;
 	private EnumTraumaState state = EnumTraumaState.NONE;
 	private long recoveryTimer;
 
-	public LimbStatus(EnumLimb limb)
+	public LimbCondition(EnumLimb limb)
 	{
 		this.limb = limb;
 	}
@@ -67,10 +67,10 @@ public class LimbStatus
 		return nbt;
 	}
 
-	public static LimbStatus readFromNBT(NBTTagCompound nbt)
+	public static LimbCondition readFromNBT(NBTTagCompound nbt)
 	{
 		EnumLimb limb = EnumLimb.values()[nbt.getInteger("limb")];
-		LimbStatus status = new LimbStatus(limb);
+		LimbCondition status = new LimbCondition(limb);
 		status.setState(EnumTraumaState.values()[nbt.getInteger("state")]);
 		status.setRecoveryTimer(nbt.getLong("recoveryTimer"));
 		return status;

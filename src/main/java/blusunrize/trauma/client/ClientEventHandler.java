@@ -39,13 +39,13 @@ public class ClientEventHandler
 				int[] rect = limb.getGuiRectangle(player);
 				if(((GuiInventory)event.getGui()).isPointInRegion(rect[0], rect[1], rect[2], rect[3], event.getMouseX(), event.getMouseY()))
 				{
-					LimbStatus limbStatus = status.getLimbStatus(limb);
-					EnumTraumaState traumaState = limbStatus.getState();
+					LimbCondition limbCondition = status.getLimbStatus(limb);
+					EnumTraumaState traumaState = limbCondition.getState();
 					List<String> text = new ArrayList<>();
 					text.add(TextFormatting.GRAY+TraumaApiUtils.getLocalizedLimb(limb));
 					String formattedState = traumaState.getTextColor()+TraumaApiUtils.getLocalizedDamage(limb, traumaState);
-					if(limbStatus.getRecoveryTimer()>0)
-						formattedState += " "+ClientUtils.ticksToFormattedTime(limbStatus.getRecoveryTimer());
+					if(limbCondition.getRecoveryTimer()>0)
+						formattedState += " "+ClientUtils.ticksToFormattedTime(limbCondition.getRecoveryTimer());
 					text.add(formattedState);
 					if(!held.isEmpty())
 						text.add(TextFormatting.DARK_GRAY+I18n.format("desc.trauma.useItem", held.getDisplayName()));

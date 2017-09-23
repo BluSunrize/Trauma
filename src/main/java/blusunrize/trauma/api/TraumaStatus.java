@@ -20,13 +20,13 @@ import java.util.Map;
  */
 public class TraumaStatus implements INBTSerializable<NBTTagCompound>
 {
-	private final Map<EnumLimb, LimbStatus> limbMap = new HashMap<EnumLimb, LimbStatus>()
+	private final Map<EnumLimb, LimbCondition> limbMap = new HashMap<EnumLimb, LimbCondition>()
 	{{
 		for(EnumLimb limb : EnumLimb.values())
-			put(limb, new LimbStatus(limb));
+			put(limb, new LimbCondition(limb));
 	}};
 
-	public LimbStatus getLimbStatus(EnumLimb limb)
+	public LimbCondition getLimbStatus(EnumLimb limb)
 	{
 		return limbMap.get(limb);
 	}
@@ -36,7 +36,7 @@ public class TraumaStatus implements INBTSerializable<NBTTagCompound>
 	{
 		NBTTagCompound nbt = new NBTTagCompound();
 		NBTTagList limbs = new NBTTagList();
-		for(LimbStatus status : limbMap.values())
+		for(LimbCondition status : limbMap.values())
 			limbs.appendTag(status.writeToNBT(null));
 		nbt.setTag("limbMap", limbs);
 		return nbt;
@@ -48,8 +48,8 @@ public class TraumaStatus implements INBTSerializable<NBTTagCompound>
 		NBTTagList limbs = nbt.getTagList("limbMap", 10);
 		for(int i = 0; i < limbs.tagCount(); i++)
 		{
-			LimbStatus limbStatus = LimbStatus.readFromNBT(limbs.getCompoundTagAt(i));
-			limbMap.put(limbStatus.getLimb(), limbStatus);
+			LimbCondition limbCondition = LimbCondition.readFromNBT(limbs.getCompoundTagAt(i));
+			limbMap.put(limbCondition.getLimb(), limbCondition);
 		}
 	}
 }
