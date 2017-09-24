@@ -7,11 +7,9 @@
  */
 package blusunrize.trauma.common;
 
-import blusunrize.trauma.api.CapabilityTrauma;
-import blusunrize.trauma.api.EnumLimb;
-import blusunrize.trauma.api.EnumTraumaState;
-import blusunrize.trauma.api.TraumaApiLib;
+import blusunrize.trauma.api.*;
 import blusunrize.trauma.api.effects.ITraumaEffect;
+import blusunrize.trauma.common.damageadapters.DamageAdapterFall;
 import blusunrize.trauma.common.effects.*;
 import blusunrize.trauma.common.utils.EventHandler;
 import blusunrize.trauma.common.utils.commands.CommandTrauma;
@@ -62,6 +60,11 @@ public class Trauma
 		int messageId = 0;
 		packetHandler.registerMessage(MessageTraumaStatusSync.HandlerServer.class, MessageTraumaStatusSync.class, messageId++, Side.SERVER);
 		packetHandler.registerMessage(MessageTraumaStatusSync.HandlerClient.class, MessageTraumaStatusSync.class, messageId++, Side.CLIENT);
+
+		/* Register Damage Handlers */
+		IDamageAdapter adapter = new DamageAdapterFall();
+		for(String fall : TraumaConfig.fallDamages)
+			TraumaApiLib.registerDamageAdapter(fall, adapter);
 
 		/* Init all the Effects */
 		/*Chest*/

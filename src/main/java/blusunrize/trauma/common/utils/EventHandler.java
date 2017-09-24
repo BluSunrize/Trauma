@@ -55,21 +55,11 @@ public class EventHandler
 		DamageSource damageSource = event.getSource();
 		float amount = event.getAmount();
 
-		if(TraumaApiLib.isFallDamage(damageSource))
+		IDamageAdapter adapter = TraumaApiLib.getDamageAdapter(damageSource.getDamageType());
+		if(adapter!=null)
 		{
-			EnumLimb leg = player.getRNG().nextBoolean()?EnumLimb.LEG_LEFT: EnumLimb.LEG_RIGHT;
-			int steps = (int)Math.ceil(amount/5);
-			if(amount > 3&&player.getRNG().nextInt(10) < amount)//Both legs, chances increase with damage
-			{
-				TraumaApiUtils.damageLimb(player, leg, steps);
-				TraumaApiUtils.damageLimb(player, leg.getOpposite(), steps);
+			if(adapter.handleDamage(player, damageSource, amount))
 				Utils.sendSyncPacket(player);
-			}
-			else if(amount >= 1)
-			{
-				TraumaApiUtils.damageLimb(player, leg, steps);
-				Utils.sendSyncPacket(player);
-			}
 			return;
 		}
 		if(amount <= 2)//Anything under a single heart is not bad

@@ -10,14 +10,13 @@ package blusunrize.trauma.api;
 import blusunrize.trauma.api.effects.ITraumaEffect;
 import com.google.common.collect.ArrayListMultimap;
 import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.util.DamageSource;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Lib Class, storing various constants
@@ -29,17 +28,6 @@ import java.util.Set;
 @MethodsReturnNonnullByDefault
 public class TraumaApiLib
 {
-	public static Set<String> FALL_DAMAGES;
-
-	/**
-	 * @param damageSource given damagesource
-	 * @return true, if the source is to be considered fall damage
-	 */
-	public static boolean isFallDamage(@Nullable DamageSource damageSource)
-	{
-		return damageSource!=null && FALL_DAMAGES.contains(damageSource.damageType);
-	}
-
 	public static Map<EnumLimb, int[]> RECOVERY_TIMES;
 
 	/**
@@ -75,5 +63,27 @@ public class TraumaApiLib
 	public static List<ITraumaEffect> getRegisteredEffects(EnumLimb limb, EnumTraumaState state)
 	{
 		return EFFECT_MUTLIMAP.get(ImmutablePair.of(limb, state));
+	}
+
+	private static Map<String, IDamageAdapter> DAMAGE_ADAPTERS = new HashMap<>();
+
+	/**
+	 * Registers a damage adapter to any source of the given name
+	 * @param damageSource the name of the source, e.g. "fall"
+	 * @param adapter the adapter
+	 */
+	public static void registerDamageAdapter(String damageSource, IDamageAdapter adapter)
+	{
+		DAMAGE_ADAPTERS.put(damageSource, adapter);
+	}
+
+	/**
+	 * @param damageSource the name of the source, e.g. "fall"
+	 * @return an adapter, or null if none is registered
+	 */
+	@Nullable
+	public static IDamageAdapter getDamageAdapter(String damageSource)
+	{
+		return DAMAGE_ADAPTERS.get(damageSource);
 	}
 }
