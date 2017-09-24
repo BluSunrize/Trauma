@@ -15,7 +15,7 @@ desc.trauma.state.HEAVY=Heavily Injured
 
 desc.trauma.limb.HEAD.state.LIGHT=Concussed
 desc.trauma.limb.HEAD.state.MEDIUM=Bruised
-desc.trauma.limb.HEAD.state.HEAVY=Crushed
+desc.trauma.limb.HEAD.state.HEAVY=
 desc.trauma.limb.CHEST.state.LIGHT=Winded
 desc.trauma.limb.CHEST.state.MEDIUM=
 desc.trauma.limb.CHEST.state.HEAVY=Crushed

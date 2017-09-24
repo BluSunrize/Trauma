@@ -1,4 +1,4 @@
-TRAUMA
+![Logo](https://raw.githubusercontent.com/BluSunrize/Trauma/master/src/main/resources/assets/trauma/logo.png)
 ================
 
 Trauma is a Minecraft Mod about critical injuries to limbs.
@@ -25,3 +25,6 @@ dependencies {
 }
 ```
 Make sure to replace [VERSION] with the version of the mod you want to work with.
+
+###Credits:
+Trauma's logo uses a modified image from game-icons.net, licensed under CC BY 3.0

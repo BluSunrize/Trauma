@@ -9,7 +9,7 @@
   "updateUrl": "",
   "authorList": ["BluSunrize"],
   "credits": "",
-  "logoFile": "",
+  "logoFile": "assets/trauma/logo.png",
   "screenshots": [],
   "dependencies": []
 }
