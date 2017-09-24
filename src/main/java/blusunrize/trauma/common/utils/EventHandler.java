@@ -13,6 +13,7 @@ import blusunrize.trauma.common.Utils;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
@@ -47,7 +48,7 @@ public class EventHandler
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void onEntityDamaged(LivingHurtEvent event)
 	{
-		if(event.isCanceled()||event.getAmount() <= 0||!(event.getEntityLiving() instanceof EntityPlayer) || event.getEntity().getEntityWorld().isRemote)
+		if(event.isCanceled()||event.getAmount() <= 0||!(event.getEntityLiving() instanceof EntityPlayer)||event.getEntity().getEntityWorld().isRemote)
 			return;
 
 		EntityPlayer player = (EntityPlayer)event.getEntityLiving();
@@ -71,9 +72,40 @@ public class EventHandler
 			}
 			return;
 		}
+		if(amount <= 2)//Anything under a single heart is not bad
+			return;
 		Entity projectile = event.getSource().getImmediateSource();
 		Entity attacker = event.getSource().getTrueSource();
 
+		EnumLimb limb = null;
+		if(projectile!=null&&!projectile.equals(attacker)&&!(projectile instanceof EntityLivingBase))//projectile exists and is not living
+		{
+			double headRelation = projectile.posY-(player.posY+1.75);
+			if(Math.abs(headRelation) <= .25)//Headshot :D
+				limb = EnumLimb.HEAD;
+			else if(Math.abs(projectile.posY-(player.posY+.375)) <= .375)//Legs
+				limb = player.getRNG().nextBoolean()?EnumLimb.LEG_LEFT: EnumLimb.LEG_RIGHT;
+			else
+				limb = EnumLimb.values()[1+player.getRNG().nextInt(4)];//Random limb in the Torso area
+		}
+		else if(attacker!=null)
+		{
+			double attackHeight = attacker.posY+attacker.height/2-player.posY;
+			if(attackHeight > 1.5)//head
+				limb = EnumLimb.HEAD;
+			else if(attackHeight<.75)
+				limb = player.getRNG().nextBoolean()?EnumLimb.LEG_LEFT: EnumLimb.LEG_RIGHT;
+			else
+				limb = EnumLimb.values()[1+player.getRNG().nextInt(4)];//Random limb in the Torso area
+		}
+		else
+			limb = EnumLimb.values()[player.getRNG().nextInt(EnumLimb.values().length)];//Random limb
+
+		if(limb!=null)
+		{
+			TraumaApiUtils.damageLimb(player, limb, 1+(int)(amount/6));
+			Utils.sendSyncPacket(player);
+		}
 	}
 
 	@SubscribeEvent(priority = EventPriority.LOW)

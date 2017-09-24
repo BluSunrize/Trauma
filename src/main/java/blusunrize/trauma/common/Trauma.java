@@ -77,7 +77,7 @@ public class Trauma
 			TraumaApiLib.registerEffect(EnumLimb.ARM_MAIN, state, effect2);
 		}
 		/*Legs*/
-		 effect = new EffectSlowness();
+		effect = new EffectSlowness();
 		for(EnumTraumaState state : EnumTraumaState.DAMAGED_STATES)
 		{
 			TraumaApiLib.registerEffect(EnumLimb.LEG_LEFT, state, effect);
