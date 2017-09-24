@@ -10,6 +10,7 @@ package blusunrize.trauma.common;
 import blusunrize.trauma.api.*;
 import blusunrize.trauma.api.effects.ITraumaEffect;
 import blusunrize.trauma.common.damageadapters.DamageAdapterFall;
+import blusunrize.trauma.common.damageadapters.DamageAdapterFallingBlock;
 import blusunrize.trauma.common.effects.*;
 import blusunrize.trauma.common.utils.EventHandler;
 import blusunrize.trauma.common.utils.commands.CommandTrauma;
@@ -63,8 +64,12 @@ public class Trauma
 
 		/* Register Damage Handlers */
 		IDamageAdapter adapter = new DamageAdapterFall();
-		for(String fall : TraumaConfig.fallDamages)
-			TraumaApiLib.registerDamageAdapter(fall, adapter);
+		for(String dmg : TraumaConfig.fallDamages)
+			TraumaApiLib.registerDamageAdapter(dmg, adapter);
+
+		adapter = new DamageAdapterFallingBlock();
+		for(String dmg : TraumaConfig.headDamages)
+			TraumaApiLib.registerDamageAdapter(dmg, adapter);
 
 		/* Init all the Effects */
 		/*Chest*/

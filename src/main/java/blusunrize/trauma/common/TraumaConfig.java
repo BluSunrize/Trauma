@@ -24,6 +24,9 @@ public class TraumaConfig
 	@Comment("A list of damages that count as falling and may break legs")
 	public static String[] fallDamages = {"fall"};
 
+	@Comment("A list of damages that count as falling blocks, and specifically target the head")
+	public static String[] headDamages = {"fallingBlock", "anvil"};
+
 	@Comment("The amount of time (in ticks) it takes for head injuries to heal. Array sorted by severity, light, medium, heavy")
 	public static int[] recovery_head = {2000, 120000, 336000};
 
