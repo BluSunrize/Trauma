@@ -9,6 +9,7 @@ package blusunrize.trauma.common;
 
 import blusunrize.trauma.api.EnumLimb;
 import blusunrize.trauma.api.TraumaApiLib;
+import com.google.common.collect.Sets;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.Config.Comment;
 
@@ -25,7 +26,13 @@ public class TraumaConfig
 	public static String[] fallDamages = {"fall"};
 
 	@Comment("A list of damages that count as falling blocks, and specifically target the head")
-	public static String[] headDamages = {"fallingBlock", "anvil"};
+	public static String[] headDamages = {"fallingBlock", "anvil", "flyIntoWall", "lightningBolt"};
+
+	@Comment("A list of damages that are ignored, because they wouldn't really cause limb damage")
+	public static String[] ignoredDamages = {
+			"inFire", "onFire", "lava", "hotFloor",
+			"starve", "cactus", "cactus", "generic", "wither", "thorns", "outOfWorld"
+	};
 
 	@Comment("The amount of time (in ticks) it takes for head injuries to heal. Array sorted by severity, light, medium, heavy")
 	public static int[] recovery_head = {2000, 120000, 336000};
@@ -38,6 +45,8 @@ public class TraumaConfig
 
 	public static void loadConfig()
 	{
+		TraumaApiLib.IGNORED_DAMAGES = Sets.newHashSet(ignoredDamages);
+
 		TraumaApiLib.RECOVERY_TIMES = new HashMap<EnumLimb, int[]>()
 		{{
 			put(EnumLimb.HEAD, recovery_head);

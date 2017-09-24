@@ -10,6 +10,7 @@ package blusunrize.trauma.api;
 import blusunrize.trauma.api.effects.ITraumaEffect;
 import com.google.common.collect.ArrayListMultimap;
 import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.util.DamageSource;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import javax.annotation.Nullable;
@@ -17,6 +18,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Lib Class, storing various constants
@@ -28,6 +30,17 @@ import java.util.Map;
 @MethodsReturnNonnullByDefault
 public class TraumaApiLib
 {
+	public static Set<String> IGNORED_DAMAGES;
+
+	/**
+	 * @param damageSource given damagesource
+	 * @return true, if the source is set in teh config to be ignored
+	 */
+	public static boolean isIgnoredDamage(@Nullable DamageSource damageSource)
+	{
+		return damageSource!=null && IGNORED_DAMAGES.contains(damageSource.damageType);
+	}
+
 	public static Map<EnumLimb, int[]> RECOVERY_TIMES;
 
 	/**

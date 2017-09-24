@@ -55,6 +55,9 @@ public class EventHandler
 		DamageSource damageSource = event.getSource();
 		float amount = event.getAmount();
 
+		if(TraumaApiLib.isIgnoredDamage(damageSource))
+			return;
+
 		IDamageAdapter adapter = TraumaApiLib.getDamageAdapter(damageSource.getDamageType());
 		if(adapter!=null)
 		{
