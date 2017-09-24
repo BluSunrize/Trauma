@@ -28,6 +28,9 @@ public class TraumaConfig
 	@Comment("A list of damages that count as falling blocks, and specifically target the head")
 	public static String[] headDamages = {"fallingBlock", "anvil", "flyIntoWall", "lightningBolt"};
 
+	@Comment("A list of damages that count as explosions, causing concussions, and chest + abdomen damage")
+	public static String[] explosionDamages = {"explosion", "explosion.player", "fireworks"};
+
 	@Comment("A list of damages that are ignored, because they wouldn't really cause limb damage")
 	public static String[] ignoredDamages = {
 			"inFire", "onFire", "lava", "hotFloor",

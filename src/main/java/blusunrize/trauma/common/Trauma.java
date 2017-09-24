@@ -9,10 +9,7 @@ package blusunrize.trauma.common;
 
 import blusunrize.trauma.api.*;
 import blusunrize.trauma.api.effects.ITraumaEffect;
-import blusunrize.trauma.common.damageadapters.DamageAdapterCramming;
-import blusunrize.trauma.common.damageadapters.DamageAdapterDrowning;
-import blusunrize.trauma.common.damageadapters.DamageAdapterFall;
-import blusunrize.trauma.common.damageadapters.DamageAdapterFallingBlock;
+import blusunrize.trauma.common.damageadapters.*;
 import blusunrize.trauma.common.effects.*;
 import blusunrize.trauma.common.utils.EventHandler;
 import blusunrize.trauma.common.utils.commands.CommandTrauma;
@@ -76,6 +73,10 @@ public class Trauma
 
 		TraumaApiLib.registerDamageAdapter(DamageSource.DROWN.getDamageType(), new DamageAdapterDrowning());
 		TraumaApiLib.registerDamageAdapter(DamageSource.CRAMMING.getDamageType(), new DamageAdapterCramming());
+
+		adapter = new DamageAdapterExplosion();
+		for(String dmg : TraumaConfig.explosionDamages)
+			TraumaApiLib.registerDamageAdapter(dmg, adapter);
 
 		/* Init all the Effects */
 		/*Chest*/
