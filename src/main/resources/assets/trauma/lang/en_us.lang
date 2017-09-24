@@ -15,12 +15,12 @@ desc.trauma.state.HEAVY=Heavily Injured
 
 desc.trauma.limb.HEAD.state.LIGHT=Concussed
 desc.trauma.limb.HEAD.state.MEDIUM=Bruised
-desc.trauma.limb.HEAD.state.HEAVY=
+desc.trauma.limb.HEAD.state.HEAVY=Fractured
 desc.trauma.limb.CHEST.state.LIGHT=Winded
-desc.trauma.limb.CHEST.state.MEDIUM=
-desc.trauma.limb.CHEST.state.HEAVY=Crushed
-desc.trauma.limb.ABDOMEN.state.LIGHT=
-desc.trauma.limb.ABDOMEN.state.MEDIUM=
+desc.trauma.limb.CHEST.state.MEDIUM=Broken Ribs
+desc.trauma.limb.CHEST.state.HEAVY=Punctured
+desc.trauma.limb.ABDOMEN.state.LIGHT=Bruised
+desc.trauma.limb.ABDOMEN.state.MEDIUM=Lacerated
 desc.trauma.limb.ABDOMEN.state.HEAVY=Torn
 desc.trauma.limb.ARM_MAIN.state.LIGHT=Sprained
 desc.trauma.limb.ARM_MAIN.state.MEDIUM=Broken
@@ -35,18 +35,22 @@ desc.trauma.limb.LEG_RIGHT.state.LIGHT=Sprained
 desc.trauma.limb.LEG_RIGHT.state.MEDIUM=Broken
 desc.trauma.limb.LEG_RIGHT.state.HEAVY=Maimed
 
-desc.trauma.effect.slowness.0=Slowness
-desc.trauma.effect.slowness.1=Slowness II
-desc.trauma.effect.slowness.2=Slowness III
-desc.trauma.effect.nojump.1=-25%% Jumpheight
-desc.trauma.effect.nojump.2=-50%% Jumpheight
-
+#Chest
+desc.trauma.effect.exhaustion=Increased Exhaustion
+#Main Arm
 desc.trauma.effect.mining.0=-32%% Mining Speed
 desc.trauma.effect.mining.1=-64%% Mining Speed
 desc.trauma.effect.mining.2=-96%% Mining Speed
 desc.trauma.effect.attackspeed.0=-16%% Attack Speed
 desc.trauma.effect.attackspeed.1=-40%% Attack Speed
 desc.trauma.effect.attackspeed.2=-64%% Attack Speed
+#Legs
+desc.trauma.effect.slowness.0=Slowness
+desc.trauma.effect.slowness.1=Slowness II
+desc.trauma.effect.slowness.2=Slowness III
+desc.trauma.effect.nojump.1=-25%% Jumpheight
+desc.trauma.effect.nojump.2=-50%% Jumpheight
+
 
 desc.trauma.useItem=Rightclick to use %s on this limb
 
@@ -58,3 +62,6 @@ chat.trauma.command.usage.set=/trauma set <limb> <state> [player]
 chat.trauma.command.error.limb=%s is not a valid limb
 chat.trauma.command.error.state=%s is not a valid state
 chat.trauma.command.set.success=%s was set to %s
+
+#Potions
+potion.trauma:disfocus=Disfocus

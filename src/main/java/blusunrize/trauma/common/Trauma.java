@@ -12,16 +12,21 @@ import blusunrize.trauma.api.effects.ITraumaEffect;
 import blusunrize.trauma.common.damageadapters.*;
 import blusunrize.trauma.common.effects.*;
 import blusunrize.trauma.common.utils.EventHandler;
+import blusunrize.trauma.common.utils.TraumaPotion;
 import blusunrize.trauma.common.utils.commands.CommandTrauma;
 import blusunrize.trauma.common.utils.network.MessageTraumaStatusSync;
+import net.minecraft.potion.Potion;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
@@ -31,6 +36,7 @@ import net.minecraftforge.fml.relauncher.Side;
  * @since 20.09.2017
  */
 @Mod(modid = Trauma.MODID, name = Trauma.MODNAME, version = Trauma.VERSION)
+@Mod.EventBusSubscriber
 public class Trauma
 {
 	public static final String MODID = "trauma";
@@ -79,8 +85,12 @@ public class Trauma
 			TraumaApiLib.registerDamageAdapter(dmg, adapter);
 
 		/* Init all the Effects */
+		/*Head*/
+		ITraumaEffect effect = new EffectVision();
+		for(EnumTraumaState state : EnumTraumaState.DAMAGED_STATES)
+			TraumaApiLib.registerEffect(EnumLimb.HEAD, state, effect);
 		/*Chest*/
-		ITraumaEffect effect = new EffectExhaustion();
+		effect = new EffectExhaustion();
 		for(EnumTraumaState state : EnumTraumaState.DAMAGED_STATES)
 			TraumaApiLib.registerEffect(EnumLimb.CHEST, state, effect);
 		/*Arms*/
@@ -118,4 +128,10 @@ public class Trauma
 		event.registerServerCommand(new CommandTrauma());
 	}
 
+	@SubscribeEvent
+	public static void registerPotions(RegistryEvent.Register<Potion> event)
+	{
+		TraumaApiLib.POTION_DISFOCUS = new TraumaPotion(new ResourceLocation(MODID, "disfocus"), true, 0x2496a7, 0);
+		event.getRegistry().register(TraumaApiLib.POTION_DISFOCUS);
+	}
 }

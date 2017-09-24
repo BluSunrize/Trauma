@@ -10,6 +10,7 @@ package blusunrize.trauma.api;
 import blusunrize.trauma.api.effects.ITraumaEffect;
 import com.google.common.collect.ArrayListMultimap;
 import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.potion.Potion;
 import net.minecraft.util.DamageSource;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
@@ -99,4 +100,6 @@ public class TraumaApiLib
 	{
 		return DAMAGE_ADAPTERS.get(damageSource);
 	}
+
+	public static Potion POTION_DISFOCUS;
 }

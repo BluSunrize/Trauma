@@ -10,11 +10,14 @@ package blusunrize.trauma.client;
 import blusunrize.trauma.api.*;
 import blusunrize.trauma.api.effects.ITraumaEffect;
 import blusunrize.trauma.common.Trauma;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiInventory;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.client.event.GuiScreenEvent.DrawScreenEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -58,5 +61,22 @@ public class ClientEventHandler
 				}
 			}
 		}
+	}
+
+	private int unfocusPotionCounter = 0;
+
+	@SubscribeEvent
+	public void onCameraSetup(EntityViewRenderEvent.CameraSetup event)
+	{
+		EntityPlayer player = Minecraft.getMinecraft().player;
+		if(player.getActivePotionEffect(TraumaApiLib.POTION_DISFOCUS)!=null)
+		{
+			float f1 = ((++unfocusPotionCounter + Minecraft.getMinecraft().getRenderPartialTicks())%60)/30;
+			double sX = Math.sin(3.14159*f1)*.1875;
+			double sY = Math.cos(3.14159*f1)*.1875;
+			GlStateManager.scale(1+sX, 1+sY, 1.0F);
+		}
+		else if(unfocusPotionCounter>0)
+			unfocusPotionCounter = 0;
 	}
 }
