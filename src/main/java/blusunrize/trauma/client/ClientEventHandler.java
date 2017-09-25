@@ -15,6 +15,7 @@ import blusunrize.trauma.api.effects.ITraumaEffect;
 import blusunrize.trauma.api.recovery.CapabilityRecoveryItem;
 import blusunrize.trauma.api.recovery.IRecoveryItem;
 import blusunrize.trauma.common.Trauma;
+import blusunrize.trauma.common.items.ItemBase;
 import blusunrize.trauma.common.utils.network.MessageApplyRecoveryItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
@@ -46,6 +47,8 @@ public class ClientEventHandler
 	@SubscribeEvent
 	public void registerModels(ModelRegistryEvent event)
 	{
+		for(int i = 0; i<((ItemBase)TraumaItems.MATERIAL).getSubtypeAmount(); i++)
+			ModelLoader.setCustomModelResourceLocation(TraumaItems.MATERIAL, i, new ModelResourceLocation(((ItemBase)TraumaItems.MATERIAL).getRegistryLoc()+"_"+((ItemBase)TraumaItems.MATERIAL).getSubnames()[i]));
 		ModelLoader.setCustomModelResourceLocation(TraumaItems.SPLINT, 0, new ModelResourceLocation(Trauma.MODID+":splint"));
 	}
 

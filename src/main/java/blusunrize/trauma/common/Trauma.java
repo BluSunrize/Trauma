@@ -17,6 +17,7 @@ import blusunrize.trauma.api.effects.ITraumaEffect;
 import blusunrize.trauma.api.recovery.CapabilityRecoveryItem;
 import blusunrize.trauma.common.damageadapters.*;
 import blusunrize.trauma.common.effects.*;
+import blusunrize.trauma.common.items.ItemBase;
 import blusunrize.trauma.common.items.ItemCurative;
 import blusunrize.trauma.common.utils.EventHandler;
 import blusunrize.trauma.common.utils.TraumaPotion;
@@ -161,8 +162,8 @@ public class Trauma
 	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> event)
 	{
-		TraumaItems.SPLINT = new ItemCurative("splint", limbCondition -> (limbCondition.getLimb().isArm()||limbCondition.getLimb().isLeg())&&limbCondition.getState().getDamageIndex()>0, 0, .66f);
-		event.getRegistry().register(TraumaItems.SPLINT);
+		TraumaItems.MATERIAL = new ItemBase("material", "poppyextract").register(event);
+		TraumaItems.SPLINT = new ItemCurative("splint", limbCondition -> (limbCondition.getLimb().isArm()||limbCondition.getLimb().isLeg())&&limbCondition.getState().getDamageIndex()>0, 0, .66f).register(event);
 	}
 
 

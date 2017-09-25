@@ -11,7 +11,9 @@ import blusunrize.trauma.common.Trauma;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.event.RegistryEvent;
 
 /**
  * @author BluSunrize
@@ -27,8 +29,8 @@ public class ItemBase extends Item
 		this.resource = new ResourceLocation(Trauma.MODID, name);
 		this.subnames = subnames;
 		this.setRegistryName(resource);
-		this.setUnlocalizedName(resource.toString().replaceAll(":","."));
-		if(this.subnames!=null && this.subnames.length>0)
+		this.setUnlocalizedName(resource.toString().replaceAll(":", "."));
+		if(this.subnames!=null&&this.subnames.length > 0)
 			this.setHasSubtypes(true);
 		this.setCreativeTab(CreativeTabs.MISC);
 	}
@@ -36,8 +38,39 @@ public class ItemBase extends Item
 	@Override
 	public String getUnlocalizedName(ItemStack stack)
 	{
-		if(this.subnames!=null && this.subnames.length>0 && stack.getMetadata()<this.subnames.length)
+		if(this.subnames!=null&&this.subnames.length > 0&&stack.getMetadata() < this.subnames.length)
 			return super.getUnlocalizedName(stack)+"."+subnames[stack.getMetadata()];
 		return super.getUnlocalizedName(stack);
+	}
+
+	@Override
+	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items)
+	{
+		if(this.subnames!=null&&this.isInCreativeTab(tab))
+			for(int i = 0; i < getSubtypeAmount(); i++)
+				items.add(new ItemStack(this, 1, i));
+		else
+			super.getSubItems(tab, items);
+	}
+
+	public ResourceLocation getRegistryLoc()
+	{
+		return resource;
+	}
+
+	public int getSubtypeAmount()
+	{
+		return this.subnames!=null?this.subnames.length: 1;
+	}
+
+	public String[] getSubnames()
+	{
+		return this.subnames;
+	}
+
+	public final Item register(RegistryEvent.Register<Item> event)
+	{
+		event.getRegistry().register(this);
+		return this;
 	}
 }
