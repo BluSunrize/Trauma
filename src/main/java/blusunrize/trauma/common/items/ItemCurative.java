@@ -10,6 +10,7 @@ package blusunrize.trauma.common.items;
 import blusunrize.trauma.api.condition.LimbCondition;
 import blusunrize.trauma.api.recovery.IRecoveryItem;
 import blusunrize.trauma.common.Trauma;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -36,6 +37,7 @@ public class ItemCurative extends Item implements IRecoveryItem
 		this.modifier = modifier;
 		this.setRegistryName(resource);
 		this.setUnlocalizedName(resource.toString().replaceAll(":","."));
+		this.setCreativeTab(CreativeTabs.MISC);
 	}
 
 	public ItemCurative(String name, Predicate<LimbCondition> applyPredicate, int duration)
