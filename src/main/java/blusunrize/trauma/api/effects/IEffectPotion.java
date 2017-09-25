@@ -7,7 +7,7 @@
  */
 package blusunrize.trauma.api.effects;
 
-import blusunrize.trauma.api.LimbCondition;
+import blusunrize.trauma.api.condition.LimbCondition;
 import net.minecraft.entity.player.EntityPlayer;
 
 import javax.annotation.ParametersAreNonnullByDefault;

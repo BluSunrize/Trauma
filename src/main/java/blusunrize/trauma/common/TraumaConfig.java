@@ -7,8 +7,8 @@
  */
 package blusunrize.trauma.common;
 
-import blusunrize.trauma.api.EnumLimb;
 import blusunrize.trauma.api.TraumaApiLib;
+import blusunrize.trauma.api.condition.EnumLimb;
 import com.google.common.collect.Sets;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.Config.Comment;

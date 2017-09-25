@@ -14,8 +14,9 @@ import blusunrize.trauma.api.condition.TraumaStatus;
 import blusunrize.trauma.api.effects.ITraumaEffect;
 import blusunrize.trauma.common.Trauma;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.EnumActionResult;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 /**
@@ -24,9 +25,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
  * @author BluSunrize
  * @since 23.09.2017
  */
-public class EffectMining implements ITraumaEffect
+public class EffectOffhandDisable implements ITraumaEffect
 {
-	public EffectMining()
+	public EffectOffhandDisable()
 	{
 		MinecraftForge.EVENT_BUS.register(this);
 	}
@@ -34,24 +35,24 @@ public class EffectMining implements ITraumaEffect
 	@Override
 	public String getIndentifier()
 	{
-		return Trauma.MODID+":Mining";
+		return Trauma.MODID+":OffhandDisable";
 	}
 
 	@Override
 	public String getDescription(EntityPlayer player, LimbCondition limbCondition)
 	{
-		return "desc.trauma.effect.mining."+limbCondition.getState().getDamageIndex();
+		return "desc.trauma.effect.unusable";
 	}
 
 	@SubscribeEvent
-	public void onBreakSpeed(BreakSpeed event)
+	public void onBreakSpeed(PlayerInteractEvent.RightClickItem event)
 	{
 		EntityPlayer player = event.getEntityPlayer();
 		TraumaStatus status = player.getCapability(CapabilityTrauma.TRAUMA_CAPABILITY, null);
-		if(status.getLimbStatus(EnumLimb.ARM_MAIN).hasEffect(getIndentifier()))
+		if(status.getLimbStatus(EnumLimb.ARM_OFFHAND).hasEffect(getIndentifier()))
 		{
-			float mod = .68f - (.32f * status.getLimbStatus(EnumLimb.ARM_MAIN).getState().getDamageIndex());
-			event.setNewSpeed(mod*event.getOriginalSpeed());
+			event.setCanceled(true);
+			event.setCancellationResult(EnumActionResult.FAIL);
 		}
 	}
 }

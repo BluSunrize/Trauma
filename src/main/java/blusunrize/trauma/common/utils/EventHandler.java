@@ -7,7 +7,13 @@
  */
 package blusunrize.trauma.common.utils;
 
-import blusunrize.trauma.api.*;
+import blusunrize.trauma.api.IDamageAdapter;
+import blusunrize.trauma.api.TraumaApiLib;
+import blusunrize.trauma.api.TraumaApiUtils;
+import blusunrize.trauma.api.condition.CapabilityTrauma;
+import blusunrize.trauma.api.condition.EnumLimb;
+import blusunrize.trauma.api.condition.LimbCondition;
+import blusunrize.trauma.api.condition.TraumaStatus;
 import blusunrize.trauma.api.effects.*;
 import blusunrize.trauma.common.Utils;
 import com.google.common.collect.HashMultimap;

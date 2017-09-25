@@ -5,7 +5,7 @@
  * This code is licensed under "Blu's License of Common Sense"
  * Details can be found in the license file in the root folder of this project
  */
-package blusunrize.trauma.api;
+package blusunrize.trauma.api.condition;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.nbt.NBTTagCompound;

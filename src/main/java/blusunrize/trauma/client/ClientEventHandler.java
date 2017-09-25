@@ -7,7 +7,9 @@
  */
 package blusunrize.trauma.client;
 
-import blusunrize.trauma.api.*;
+import blusunrize.trauma.api.TraumaApiLib;
+import blusunrize.trauma.api.TraumaApiUtils;
+import blusunrize.trauma.api.condition.*;
 import blusunrize.trauma.api.effects.ITraumaEffect;
 import blusunrize.trauma.common.Trauma;
 import net.minecraft.client.Minecraft;
@@ -19,6 +21,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.client.event.GuiScreenEvent.DrawScreenEvent;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.ArrayList;
@@ -30,6 +33,12 @@ import java.util.List;
  */
 public class ClientEventHandler
 {
+	@SubscribeEvent
+	public void registerModels(ModelRegistryEvent event)
+	{
+
+	}
+
 	@SubscribeEvent
 	public void onGuiDraw(DrawScreenEvent event)
 	{

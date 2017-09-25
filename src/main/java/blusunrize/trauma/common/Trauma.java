@@ -7,14 +7,21 @@
  */
 package blusunrize.trauma.common;
 
-import blusunrize.trauma.api.*;
+import blusunrize.trauma.api.IDamageAdapter;
+import blusunrize.trauma.api.TraumaApiLib;
+import blusunrize.trauma.api.TraumaItems;
+import blusunrize.trauma.api.condition.CapabilityTrauma;
+import blusunrize.trauma.api.condition.EnumLimb;
+import blusunrize.trauma.api.condition.EnumTraumaState;
 import blusunrize.trauma.api.effects.ITraumaEffect;
 import blusunrize.trauma.common.damageadapters.*;
 import blusunrize.trauma.common.effects.*;
+import blusunrize.trauma.common.items.ItemCurative;
 import blusunrize.trauma.common.utils.EventHandler;
 import blusunrize.trauma.common.utils.TraumaPotion;
 import blusunrize.trauma.common.utils.commands.CommandTrauma;
 import blusunrize.trauma.common.utils.network.MessageTraumaStatusSync;
+import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
@@ -117,6 +124,8 @@ public class Trauma
 			TraumaApiLib.registerEffect(EnumLimb.ARM_MAIN, state, effect);
 			TraumaApiLib.registerEffect(EnumLimb.ARM_MAIN, state, effect2);
 		}
+		effect = new EffectOffhandDisable();
+		TraumaApiLib.registerEffect(EnumLimb.ARM_OFFHAND, EnumTraumaState.HEAVY, effect);
 
 		/*Legs*/
 		effect = new EffectSlowness();
@@ -144,6 +153,13 @@ public class Trauma
 	{
 		event.registerServerCommand(new CommandTrauma());
 	}
+
+	@SubscribeEvent
+	public static void registerItems(RegistryEvent.Register<Item> event)
+	{
+		event.getRegistry().register((TraumaItems.SPLINT = new ItemCurative("splint")));
+	}
+
 
 	@SubscribeEvent
 	public static void registerPotions(RegistryEvent.Register<Potion> event)

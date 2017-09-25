@@ -7,7 +7,7 @@
  */
 package blusunrize.trauma.common.effects;
 
-import blusunrize.trauma.api.LimbCondition;
+import blusunrize.trauma.api.condition.LimbCondition;
 import blusunrize.trauma.api.effects.IEffectTicking;
 import blusunrize.trauma.common.Trauma;
 import net.minecraft.entity.player.EntityPlayer;

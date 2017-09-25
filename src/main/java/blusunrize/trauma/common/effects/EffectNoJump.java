@@ -7,10 +7,10 @@
  */
 package blusunrize.trauma.common.effects;
 
-import blusunrize.trauma.api.CapabilityTrauma;
-import blusunrize.trauma.api.EnumLimb;
-import blusunrize.trauma.api.LimbCondition;
-import blusunrize.trauma.api.TraumaStatus;
+import blusunrize.trauma.api.condition.CapabilityTrauma;
+import blusunrize.trauma.api.condition.EnumLimb;
+import blusunrize.trauma.api.condition.LimbCondition;
+import blusunrize.trauma.api.condition.TraumaStatus;
 import blusunrize.trauma.api.effects.ITraumaEffect;
 import blusunrize.trauma.common.Trauma;
 import net.minecraft.entity.player.EntityPlayer;

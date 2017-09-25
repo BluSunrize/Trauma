@@ -7,8 +7,8 @@
  */
 package blusunrize.trauma.common.utils.network;
 
-import blusunrize.trauma.api.CapabilityTrauma;
-import blusunrize.trauma.api.TraumaStatus;
+import blusunrize.trauma.api.condition.CapabilityTrauma;
+import blusunrize.trauma.api.condition.TraumaStatus;
 import blusunrize.trauma.common.Trauma;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;

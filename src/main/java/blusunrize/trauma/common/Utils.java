@@ -7,7 +7,7 @@
  */
 package blusunrize.trauma.common;
 
-import blusunrize.trauma.api.CapabilityTrauma;
+import blusunrize.trauma.api.condition.CapabilityTrauma;
 import blusunrize.trauma.common.utils.network.MessageTraumaStatusSync;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;

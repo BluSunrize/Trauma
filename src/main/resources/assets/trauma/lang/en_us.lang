@@ -49,6 +49,7 @@ desc.trauma.effect.mining.2=-96%% Mining Speed
 desc.trauma.effect.attackspeed.0=-16%% Attack Speed
 desc.trauma.effect.attackspeed.1=-40%% Attack Speed
 desc.trauma.effect.attackspeed.2=-64%% Attack Speed
+desc.trauma.effect.unusable=Unusable
 #Legs
 desc.trauma.effect.slowness.0=Slowness
 desc.trauma.effect.slowness.1=Slowness II

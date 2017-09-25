@@ -7,9 +7,9 @@
  */
 package blusunrize.trauma.common.damageadapters;
 
-import blusunrize.trauma.api.EnumLimb;
 import blusunrize.trauma.api.IDamageAdapter;
 import blusunrize.trauma.api.TraumaApiUtils;
+import blusunrize.trauma.api.condition.EnumLimb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 

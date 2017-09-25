@@ -7,7 +7,7 @@
  */
 package blusunrize.trauma.api.effects;
 
-import blusunrize.trauma.api.LimbCondition;
+import blusunrize.trauma.api.condition.LimbCondition;
 import com.google.common.collect.Multimap;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;

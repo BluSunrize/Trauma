@@ -7,7 +7,11 @@
  */
 package blusunrize.trauma.common.utils.commands;
 
-import blusunrize.trauma.api.*;
+import blusunrize.trauma.api.TraumaApiUtils;
+import blusunrize.trauma.api.condition.CapabilityTrauma;
+import blusunrize.trauma.api.condition.EnumLimb;
+import blusunrize.trauma.api.condition.EnumTraumaState;
+import blusunrize.trauma.api.condition.TraumaStatus;
 import blusunrize.trauma.common.Trauma;
 import blusunrize.trauma.common.Utils;
 import net.minecraft.command.*;

@@ -7,6 +7,7 @@
  */
 package blusunrize.trauma.api;
 
+import blusunrize.trauma.api.condition.*;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;

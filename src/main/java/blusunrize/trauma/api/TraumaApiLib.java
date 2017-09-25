@@ -7,6 +7,8 @@
  */
 package blusunrize.trauma.api;
 
+import blusunrize.trauma.api.condition.EnumLimb;
+import blusunrize.trauma.api.condition.EnumTraumaState;
 import blusunrize.trauma.api.effects.ITraumaEffect;
 import com.google.common.collect.ArrayListMultimap;
 import mcp.MethodsReturnNonnullByDefault;
