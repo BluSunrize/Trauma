@@ -22,12 +22,12 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void preInit()
 	{
+		MinecraftForge.EVENT_BUS.register(new ClientEventHandler());
 	}
 
 	@Override
 	public void init()
 	{
-		MinecraftForge.EVENT_BUS.register(new ClientEventHandler());
 	}
 
 	@Override

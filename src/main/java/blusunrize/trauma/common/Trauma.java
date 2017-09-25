@@ -63,16 +63,16 @@ public class Trauma
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		proxy.preInit();
+		TraumaConfig.loadConfig();
+		MinecraftForge.EVENT_BUS.register(new EventHandler());
 	}
 
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event)
 	{
 		proxy.init();
-		TraumaConfig.loadConfig();
 		CapabilityTrauma.register();
 		CapabilityRecoveryItem.register();
-		MinecraftForge.EVENT_BUS.register(new EventHandler());
 
 		int messageId = 0;
 		packetHandler.registerMessage(MessageTraumaStatusSync.HandlerServer.class, MessageTraumaStatusSync.class, messageId++, Side.SERVER);
@@ -161,7 +161,7 @@ public class Trauma
 	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> event)
 	{
-		TraumaItems.SPLINT = new ItemCurative("splint", limbCondition -> limbCondition.getLimb().isArm()||limbCondition.getLimb().isLeg(), 0, .5f);
+		TraumaItems.SPLINT = new ItemCurative("splint", limbCondition -> (limbCondition.getLimb().isArm()||limbCondition.getLimb().isLeg())&&limbCondition.getState().getDamageIndex()>0, 0, .66f);
 		event.getRegistry().register(TraumaItems.SPLINT);
 	}
 

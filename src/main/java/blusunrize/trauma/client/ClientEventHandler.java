@@ -46,7 +46,7 @@ public class ClientEventHandler
 	@SubscribeEvent
 	public void registerModels(ModelRegistryEvent event)
 	{
-		ModelLoader.setCustomModelResourceLocation(TraumaItems.SPLINT, 0, new ModelResourceLocation(Trauma.MODID, "splint"));
+		ModelLoader.setCustomModelResourceLocation(TraumaItems.SPLINT, 0, new ModelResourceLocation(Trauma.MODID+":splint"));
 	}
 
 	@SubscribeEvent

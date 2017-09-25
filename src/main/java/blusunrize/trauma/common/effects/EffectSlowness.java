@@ -31,7 +31,7 @@ public class EffectSlowness implements IEffectPotion
 	@Override
 	public String getDescription(EntityPlayer player, LimbCondition limbCondition)
 	{
-		return "desc.trauma.effect.slowness."+limbCondition.getState().getDamageIndex();
+		return "desc.trauma.effect.slowness."+(limbCondition.getState().getDamageIndex()-(limbCondition.hasRecoveryItems("trauma:splint")?1:0));
 	}
 
 	@Override
