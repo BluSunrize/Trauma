@@ -42,7 +42,7 @@ import java.util.Map;
 public class EventHandler
 {
 	@SubscribeEvent
-	public void onCapabilitiesAttach(AttachCapabilitiesEvent event)
+	public void onCapabilitiesAttach(AttachCapabilitiesEvent<Entity> event)
 	{
 		if(event.getObject() instanceof EntityPlayer)
 		{

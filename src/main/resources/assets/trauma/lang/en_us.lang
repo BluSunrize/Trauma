@@ -1,5 +1,9 @@
 ï»¿ Byte Order Mark, because fuck you IntelliJ
 
+item.trauma.splint.name=Splint
+
+desc.trauma.recovery.trauma:splint=Splinted
+
 desc.trauma.limb.HEAD=Head
 desc.trauma.limb.CHEST=Chest
 desc.trauma.limb.ABDOMEN=Abdomen

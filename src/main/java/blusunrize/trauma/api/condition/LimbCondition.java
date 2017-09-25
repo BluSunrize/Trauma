@@ -17,12 +17,11 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.nbt.NBTTagString;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.HashMap;
-import java.util.Set;
+import java.util.Map.Entry;
 
 /**
  * A class representing the condition of a limb<br>
@@ -38,7 +37,7 @@ public class LimbCondition
 	private final EnumLimb limb;
 	private EnumTraumaState state = EnumTraumaState.NONE;
 	private long recoveryTimer;
-	private Set<String> recoveryItems;
+	private HashMap<String, Integer> recoveryItems = new HashMap<>();
 	private HashMap<String, ITraumaEffect> effects = new HashMap<>();
 
 	public LimbCondition(EnumLimb limb)
@@ -91,18 +90,26 @@ public class LimbCondition
 	/**
 	 * @return a set of all recovery items applied, by their unique String keys
 	 */
-	public Set<String> getRecoveryItems()
+	public HashMap<String, Integer> getRecoveryItems()
 	{
 		return recoveryItems;
 	}
 
 	/**
-	 * Applies a recovery item, saved by its unique String key
-	 * @param recoveryItem
+	 * @return if a given recovery item (identified by its key) is applied
 	 */
-	public void addRecoveryItem(String recoveryItem)
+	public boolean hasRecoveryItems(String item)
 	{
-		this.recoveryItems.add(recoveryItem);
+		return recoveryItems.containsKey(item);
+	}
+
+	/**
+	 * Applies a recovery item, saved by its unique String key
+	 * @param item
+	 */
+	public void addRecoveryItem(String item, int timer)
+	{
+		this.recoveryItems.put(item, timer);
 	}
 
 	/**
@@ -159,6 +166,16 @@ public class LimbCondition
 	 */
 	public boolean tick(EntityPlayer player)
 	{
+		int val;
+		for(String item : this.recoveryItems.keySet())
+		{
+			val = this.recoveryItems.get(item);
+			if(val > 0)
+				if(--val <= 0)
+					this.recoveryItems.remove(item);
+				else
+					this.recoveryItems.put(item, val);
+		}
 		if(this.recoveryTimer>0 && --this.recoveryTimer<=0)
 		{
 			cure(player);
@@ -189,6 +206,7 @@ public class LimbCondition
 		this.setState(EnumTraumaState.NONE);
 		this.recoveryTimer = 0;
 		this.clearEffects(player);
+		this.recoveryItems.clear();
 	}
 
 	public NBTTagCompound writeToNBT(@Nullable NBTTagCompound nbt)
@@ -199,8 +217,13 @@ public class LimbCondition
 		nbt.setInteger("state", state.ordinal());
 		nbt.setLong("recoveryTimer", recoveryTimer);
 		NBTTagList recItems = new NBTTagList();
-		for(String s : recoveryItems)
-			recItems.appendTag(new NBTTagString(s));
+		for(Entry<String, Integer> e : recoveryItems.entrySet())
+		{
+			NBTTagCompound tag = new NBTTagCompound();
+			tag.setString("item", e.getKey());
+			tag.setInteger("timer", e.getValue());
+			recItems.appendTag(tag);
+		}
 		nbt.setTag("recoveryItems", recItems);
 		return nbt;
 	}
@@ -211,9 +234,12 @@ public class LimbCondition
 		LimbCondition limbCondition = new LimbCondition(limb);
 		limbCondition.setState(EnumTraumaState.values()[nbt.getInteger("state")]);
 		limbCondition.setRecoveryTimer(nbt.getLong("recoveryTimer"));
-		NBTTagList recItems = nbt.getTagList("recoveryItems", 8);
+		NBTTagList recItems = nbt.getTagList("recoveryItems", 10);
 		for(int i=0; i<recItems.tagCount(); i++)
-			limbCondition.addRecoveryItem(recItems.getStringTagAt(i));
+		{
+			NBTTagCompound tag = recItems.getCompoundTagAt(i);
+			limbCondition.addRecoveryItem(tag.getString("item"), tag.getInteger("timer"));
+		}
 		for(ITraumaEffect effect : TraumaApiLib.getRegisteredEffects(limbCondition.getLimb(), limbCondition.getState()))
 			limbCondition.addEffect(effect);
 		return limbCondition;

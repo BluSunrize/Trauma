@@ -14,12 +14,14 @@ import blusunrize.trauma.api.condition.CapabilityTrauma;
 import blusunrize.trauma.api.condition.EnumLimb;
 import blusunrize.trauma.api.condition.EnumTraumaState;
 import blusunrize.trauma.api.effects.ITraumaEffect;
+import blusunrize.trauma.api.recovery.CapabilityRecoveryItem;
 import blusunrize.trauma.common.damageadapters.*;
 import blusunrize.trauma.common.effects.*;
 import blusunrize.trauma.common.items.ItemCurative;
 import blusunrize.trauma.common.utils.EventHandler;
 import blusunrize.trauma.common.utils.TraumaPotion;
 import blusunrize.trauma.common.utils.commands.CommandTrauma;
+import blusunrize.trauma.common.utils.network.MessageApplyRecoveryItem;
 import blusunrize.trauma.common.utils.network.MessageTraumaStatusSync;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
@@ -69,11 +71,13 @@ public class Trauma
 		proxy.init();
 		TraumaConfig.loadConfig();
 		CapabilityTrauma.register();
+		CapabilityRecoveryItem.register();
 		MinecraftForge.EVENT_BUS.register(new EventHandler());
 
 		int messageId = 0;
 		packetHandler.registerMessage(MessageTraumaStatusSync.HandlerServer.class, MessageTraumaStatusSync.class, messageId++, Side.SERVER);
 		packetHandler.registerMessage(MessageTraumaStatusSync.HandlerClient.class, MessageTraumaStatusSync.class, messageId++, Side.CLIENT);
+		packetHandler.registerMessage(MessageApplyRecoveryItem.HandlerServer.class, MessageApplyRecoveryItem.class, messageId++, Side.SERVER);
 
 		/*DamageSources*/
 		TraumaApiLib.BLEEDING_DAMAGE = new DamageSource("trauma:bleeding");
@@ -157,7 +161,8 @@ public class Trauma
 	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> event)
 	{
-		event.getRegistry().register((TraumaItems.SPLINT = new ItemCurative("splint")));
+		TraumaItems.SPLINT = new ItemCurative("splint", limbCondition -> limbCondition.getLimb().isArm()||limbCondition.getLimb().isLeg(), 0, .5f);
+		event.getRegistry().register(TraumaItems.SPLINT);
 	}
 
 

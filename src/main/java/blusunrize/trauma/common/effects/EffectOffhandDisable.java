@@ -46,7 +46,7 @@ public class EffectOffhandDisable implements ITraumaEffect
 	}
 
 	@SubscribeEvent
-	public void onBreakSpeed(PlayerInteractEvent.RightClickItem event)
+	public void onInteract(PlayerInteractEvent.RightClickItem event)
 	{
 		EntityPlayer player = event.getEntityPlayer();
 		TraumaStatus status = player.getCapability(CapabilityTrauma.TRAUMA_CAPABILITY, null);

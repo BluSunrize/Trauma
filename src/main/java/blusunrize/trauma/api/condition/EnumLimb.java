@@ -60,4 +60,14 @@ public enum EnumLimb
 	{
 		return this==ARM_MAIN?ARM_OFFHAND: this==ARM_OFFHAND?ARM_MAIN: this==LEG_LEFT?LEG_RIGHT: this==LEG_RIGHT?LEG_LEFT: null;
 	}
+
+	public boolean isArm()
+	{
+		return this==ARM_MAIN||this==ARM_OFFHAND;
+	}
+
+	public boolean isLeg()
+	{
+		return this==LEG_LEFT||this==LEG_RIGHT;
+	}
 }
