@@ -57,7 +57,7 @@ public class CommandTrauma extends CommandBase
 				if(status!=null)
 				{
 					for(EnumLimb limb : EnumLimb.values())
-						msg += "\n  "+limb+": "+status.getLimbStatus(limb).getState();
+						msg += "\n  "+limb+": "+status.getLimbCondition(limb).getState();
 				}
 				sender.sendMessage(new TextComponentString(msg));
 			}

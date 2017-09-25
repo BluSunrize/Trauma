@@ -48,10 +48,10 @@ public class EffectMining implements ITraumaEffect
 	{
 		EntityPlayer player = event.getEntityPlayer();
 		TraumaStatus status = player.getCapability(CapabilityTrauma.TRAUMA_CAPABILITY, null);
-		LimbCondition limbCondition = status.getLimbStatus(EnumLimb.ARM_MAIN);
+		LimbCondition limbCondition = status.getLimbCondition(EnumLimb.ARM_MAIN);
 		if(limbCondition.hasEffect(getIndentifier()))
 		{
-			float mod = .68f - (.32f * (status.getLimbStatus(EnumLimb.ARM_MAIN).getState().getDamageIndex()-(limbCondition.hasRecoveryItems("trauma:splint")?1:0)));
+			float mod = .68f - (.32f * (status.getLimbCondition(EnumLimb.ARM_MAIN).getState().getDamageIndex()-(limbCondition.hasRecoveryItems("trauma:splint")?1:0)));
 			event.setNewSpeed(mod*event.getOriginalSpeed());
 		}
 	}

@@ -51,10 +51,10 @@ public class EffectNoJump implements ITraumaEffect
 			EntityPlayer player = (EntityPlayer)event.getEntityLiving();
 			TraumaStatus status = player.getCapability(CapabilityTrauma.TRAUMA_CAPABILITY, null);
 			float mod = 1;
-			if(status.getLimbStatus(EnumLimb.LEG_LEFT).hasEffect(getIndentifier()))
-				mod -= .25*status.getLimbStatus(EnumLimb.LEG_LEFT).getState().getDamageIndex();
-			if(status.getLimbStatus(EnumLimb.LEG_RIGHT).hasEffect(getIndentifier()))
-				mod -= .25*status.getLimbStatus(EnumLimb.LEG_RIGHT).getState().getDamageIndex();
+			if(status.getLimbCondition(EnumLimb.LEG_LEFT).hasEffect(getIndentifier()))
+				mod -= .25*status.getLimbCondition(EnumLimb.LEG_LEFT).getState().getDamageIndex();
+			if(status.getLimbCondition(EnumLimb.LEG_RIGHT).hasEffect(getIndentifier()))
+				mod -= .25*status.getLimbCondition(EnumLimb.LEG_RIGHT).getState().getDamageIndex();
 
 			player.motionY *= mod;
 		}

@@ -117,7 +117,7 @@ public class EventHandler
 			Multimap<String, AttributeModifier> attributeMap = HashMultimap.create();
 			for(EnumLimb limb : EnumLimb.values())
 			{
-				LimbCondition condition = status.getLimbStatus(limb);
+				LimbCondition condition = status.getLimbCondition(limb);
 				condition.tick(event.player);
 				for(ITraumaEffect effect : condition.getEffects().values())
 				{

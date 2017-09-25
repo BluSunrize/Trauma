@@ -50,7 +50,7 @@ public class EffectOffhandDisable implements ITraumaEffect
 	{
 		EntityPlayer player = event.getEntityPlayer();
 		TraumaStatus status = player.getCapability(CapabilityTrauma.TRAUMA_CAPABILITY, null);
-		if(event.getHand()==EnumHand.OFF_HAND && status.getLimbStatus(EnumLimb.ARM_OFFHAND).hasEffect(getIndentifier()))
+		if(event.getHand()==EnumHand.OFF_HAND && status.getLimbCondition(EnumLimb.ARM_OFFHAND).hasEffect(getIndentifier()))
 		{
 			event.setCanceled(true);
 			event.setCancellationResult(EnumActionResult.FAIL);

@@ -30,7 +30,7 @@ public class TraumaStatus implements INBTSerializable<NBTTagCompound>
 			put(limb, new LimbCondition(limb));
 	}};
 
-	public LimbCondition getLimbStatus(EnumLimb limb)
+	public LimbCondition getLimbCondition(EnumLimb limb)
 	{
 		return limbMap.get(limb);
 	}

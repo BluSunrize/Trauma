@@ -46,7 +46,7 @@ public class TraumaApiUtils
 	public static EnumTraumaState getLimbState(EntityPlayer player, EnumLimb limb)
 	{
 		TraumaStatus status = player.getCapability(CapabilityTrauma.TRAUMA_CAPABILITY, null);
-		return status.getLimbStatus(limb).getState();
+		return status.getLimbCondition(limb).getState();
 	}
 
 	public static boolean setLimbState(EntityPlayer player, EnumLimb limb, EnumTraumaState state, boolean fireEvent)
@@ -54,7 +54,7 @@ public class TraumaApiUtils
 		if(!fireEvent||!MinecraftForge.EVENT_BUS.post(new LimbStateEvent(player, limb, state)))
 		{
 			TraumaStatus status = player.getCapability(CapabilityTrauma.TRAUMA_CAPABILITY, null);
-			LimbCondition limbCondition = status.getLimbStatus(limb);
+			LimbCondition limbCondition = status.getLimbCondition(limb);
 			limbCondition.assumeState(player, state);
 			return true;
 		}

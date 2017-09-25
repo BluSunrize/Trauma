@@ -66,7 +66,7 @@ public class ClientEventHandler
 				int[] rect = limb.getGuiRectangle(player);
 				if(((GuiInventory)event.getGui()).isPointInRegion(rect[0], rect[1], rect[2], rect[3], event.getMouseX(), event.getMouseY()))
 				{
-					LimbCondition limbCondition = status.getLimbStatus(limb);
+					LimbCondition limbCondition = status.getLimbCondition(limb);
 					EnumTraumaState traumaState = limbCondition.getState();
 					List<String> text = new ArrayList<>();
 					text.add("X: "+event.getMouseX()+", Y: "+event.getMouseY());
@@ -119,7 +119,7 @@ public class ClientEventHandler
 					int[] rect = limb.getGuiRectangle(player);
 					if(gui.isPointInRegion(rect[0], rect[1], rect[2], rect[3], mouseX, mouseY))
 					{
-						LimbCondition limbCondition = status.getLimbStatus(limb);
+						LimbCondition limbCondition = status.getLimbCondition(limb);
 						if(iRecoveryItem.canApply(held, player, limbCondition))
 						{
 							limbCondition.addRecoveryItem(iRecoveryItem.getIdentifier(held), iRecoveryItem.getDuration(held, player, limbCondition));
