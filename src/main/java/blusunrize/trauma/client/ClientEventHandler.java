@@ -69,7 +69,6 @@ public class ClientEventHandler
 					LimbCondition limbCondition = status.getLimbCondition(limb);
 					EnumTraumaState traumaState = limbCondition.getState();
 					List<String> text = new ArrayList<>();
-					text.add("X: "+event.getMouseX()+", Y: "+event.getMouseY());
 					text.add(TextFormatting.GRAY+TraumaApiUtils.getLocalizedLimb(limb));
 					String formattedState = traumaState.getTextColor()+TraumaApiUtils.getLocalizedDamage(limb, traumaState);
 					if(limbCondition.getRecoveryTimer() > 0)
