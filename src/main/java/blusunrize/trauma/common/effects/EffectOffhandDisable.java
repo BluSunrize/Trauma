@@ -15,6 +15,7 @@ import blusunrize.trauma.api.effects.ITraumaEffect;
 import blusunrize.trauma.common.Trauma;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -49,7 +50,7 @@ public class EffectOffhandDisable implements ITraumaEffect
 	{
 		EntityPlayer player = event.getEntityPlayer();
 		TraumaStatus status = player.getCapability(CapabilityTrauma.TRAUMA_CAPABILITY, null);
-		if(status.getLimbStatus(EnumLimb.ARM_OFFHAND).hasEffect(getIndentifier()))
+		if(event.getHand()==EnumHand.OFF_HAND && status.getLimbStatus(EnumLimb.ARM_OFFHAND).hasEffect(getIndentifier()))
 		{
 			event.setCanceled(true);
 			event.setCancellationResult(EnumActionResult.FAIL);
