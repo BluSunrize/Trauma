@@ -9,12 +9,8 @@ package blusunrize.trauma.common.items;
 
 import blusunrize.trauma.api.condition.LimbCondition;
 import blusunrize.trauma.api.recovery.IRecoveryItem;
-import blusunrize.trauma.common.Trauma;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 
 import java.util.function.Predicate;
 
@@ -22,22 +18,18 @@ import java.util.function.Predicate;
  * @author BluSunrize
  * @since 25.09.2017
  */
-public class ItemCurative extends Item implements IRecoveryItem
+public class ItemCurative extends ItemBase implements IRecoveryItem
 {
-	private final ResourceLocation resource;
 	private final Predicate<LimbCondition> applyPredicate;
 	private final int duration;
 	private final float modifier;
 
 	public ItemCurative(String name, Predicate<LimbCondition> applyPredicate, int duration, float modifier)
 	{
-		this.resource = new ResourceLocation(Trauma.MODID, name);
+		super(name);
 		this.applyPredicate = applyPredicate;
 		this.duration = duration;
 		this.modifier = modifier;
-		this.setRegistryName(resource);
-		this.setUnlocalizedName(resource.toString().replaceAll(":","."));
-		this.setCreativeTab(CreativeTabs.MISC);
 	}
 
 	public ItemCurative(String name, Predicate<LimbCondition> applyPredicate, int duration)
