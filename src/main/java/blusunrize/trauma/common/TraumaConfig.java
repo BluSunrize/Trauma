@@ -34,7 +34,7 @@ public class TraumaConfig
 	@Comment("A list of damages that are ignored, because they wouldn't really cause limb damage")
 	public static String[] ignoredDamages = {
 			"inFire", "onFire", "lava", "hotFloor",
-			"starve", "cactus", "cactus", "generic", "wither", "thorns", "outOfWorld"
+			"starve", "cactus", "cactus", "generic", "wither", "thorns", "outOfWorld", "trauma:bleeding"
 	};
 
 	@Comment("The amount of time (in ticks) it takes for head injuries to heal. Array sorted by severity, light, medium, heavy")

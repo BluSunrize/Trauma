@@ -102,4 +102,6 @@ public class TraumaApiLib
 	}
 
 	public static Potion POTION_DISFOCUS;
+
+	public static DamageSource BLEEDING_DAMAGE;
 }

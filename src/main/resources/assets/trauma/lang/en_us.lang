@@ -35,8 +35,12 @@ desc.trauma.limb.LEG_RIGHT.state.LIGHT=Sprained
 desc.trauma.limb.LEG_RIGHT.state.MEDIUM=Broken
 desc.trauma.limb.LEG_RIGHT.state.HEAVY=Maimed
 
+#Head
+desc.trauma.effect.vision=Impaired Vision
 #Chest
 desc.trauma.effect.exhaustion=Increased Exhaustion
+#Abdomen
+desc.trauma.effect.bleeding=Internal Bleeding
 #Main Arm
 desc.trauma.effect.mining.0=-32%% Mining Speed
 desc.trauma.effect.mining.1=-64%% Mining Speed
@@ -65,3 +69,6 @@ chat.trauma.command.set.success=%s was set to %s
 
 #Potions
 potion.trauma:disfocus=Disfocus
+
+#Damage
+death.attack.trauma:bleeding=%1$s bled out

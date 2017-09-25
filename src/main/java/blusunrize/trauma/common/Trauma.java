@@ -68,6 +68,9 @@ public class Trauma
 		packetHandler.registerMessage(MessageTraumaStatusSync.HandlerServer.class, MessageTraumaStatusSync.class, messageId++, Side.SERVER);
 		packetHandler.registerMessage(MessageTraumaStatusSync.HandlerClient.class, MessageTraumaStatusSync.class, messageId++, Side.CLIENT);
 
+		/*DamageSources*/
+		TraumaApiLib.BLEEDING_DAMAGE = new DamageSource("trauma:bleeding");
+
 		/* Register Damage Handlers */
 		IDamageAdapter adapter = new DamageAdapterFall();
 		for(String dmg : TraumaConfig.fallDamages)
@@ -87,20 +90,30 @@ public class Trauma
 		/* Init all the Effects */
 		/*Head*/
 		ITraumaEffect effect = new EffectVision();
+		ITraumaEffect effect2 = new EffectBleeding();
 		for(EnumTraumaState state : EnumTraumaState.DAMAGED_STATES)
-			TraumaApiLib.registerEffect(EnumLimb.HEAD, state, effect);
+			TraumaApiLib.registerEffect(EnumLimb.HEAD, state, effect);//Vision
+		TraumaApiLib.registerEffect(EnumLimb.HEAD, EnumTraumaState.HEAVY, effect2);//Internal Bleeding
+
 		/*Chest*/
 		effect = new EffectExhaustion();
 		for(EnumTraumaState state : EnumTraumaState.DAMAGED_STATES)
-			TraumaApiLib.registerEffect(EnumLimb.CHEST, state, effect);
+			TraumaApiLib.registerEffect(EnumLimb.CHEST, state, effect);//Exhaustion
+		TraumaApiLib.registerEffect(EnumLimb.HEAD, EnumTraumaState.HEAVY, effect2);//Internal Bleeding
+
+		/*Abdomen*/
+		for(EnumTraumaState state : EnumTraumaState.EQUAL_OR_WORSE_STATES.get(EnumTraumaState.MEDIUM))
+			TraumaApiLib.registerEffect(EnumLimb.ABDOMEN, state, effect2);//Internal Bleeding
+
 		/*Arms*/
 		effect = new EffectMining();
-		ITraumaEffect effect2 = new EffectAttackSpeed();
+		effect2 = new EffectAttackSpeed();
 		for(EnumTraumaState state : EnumTraumaState.DAMAGED_STATES)
 		{
 			TraumaApiLib.registerEffect(EnumLimb.ARM_MAIN, state, effect);
 			TraumaApiLib.registerEffect(EnumLimb.ARM_MAIN, state, effect2);
 		}
+
 		/*Legs*/
 		effect = new EffectSlowness();
 		for(EnumTraumaState state : EnumTraumaState.DAMAGED_STATES)
