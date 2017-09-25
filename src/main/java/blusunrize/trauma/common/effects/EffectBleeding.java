@@ -14,6 +14,8 @@ import blusunrize.trauma.common.Trauma;
 import net.minecraft.entity.player.EntityPlayer;
 
 /**
+ * Irregular damage ticks
+ *
  * @author BluSunrize
  * @since 23.09.2017
  */

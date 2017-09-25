@@ -37,6 +37,7 @@ desc.trauma.limb.LEG_RIGHT.state.HEAVY=Maimed
 
 #Head
 desc.trauma.effect.vision=Impaired Vision
+desc.trauma.effect.amnesia=Anterograde Amnesia
 #Chest
 desc.trauma.effect.exhaustion=Increased Exhaustion
 #Abdomen

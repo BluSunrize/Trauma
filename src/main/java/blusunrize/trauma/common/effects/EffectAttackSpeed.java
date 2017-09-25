@@ -19,6 +19,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import java.util.UUID;
 
 /**
+ * Reduced attack speed
+ *
  * @author BluSunrize
  * @since 23.09.2017
  */

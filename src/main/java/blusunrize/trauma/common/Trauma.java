@@ -90,9 +90,13 @@ public class Trauma
 		/* Init all the Effects */
 		/*Head*/
 		ITraumaEffect effect = new EffectVision();
-		ITraumaEffect effect2 = new EffectBleeding();
+		ITraumaEffect effect2 = new EffectAmnesia();
 		for(EnumTraumaState state : EnumTraumaState.DAMAGED_STATES)
+		{
 			TraumaApiLib.registerEffect(EnumLimb.HEAD, state, effect);//Vision
+			TraumaApiLib.registerEffect(EnumLimb.HEAD, state, effect2);//Amnesia
+		}
+		effect2 = new EffectBleeding();
 		TraumaApiLib.registerEffect(EnumLimb.HEAD, EnumTraumaState.HEAVY, effect2);//Internal Bleeding
 
 		/*Chest*/

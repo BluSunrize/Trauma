@@ -8,37 +8,34 @@
 package blusunrize.trauma.common.effects;
 
 import blusunrize.trauma.api.LimbCondition;
-import blusunrize.trauma.api.effects.IEffectPotion;
-import blusunrize.trauma.api.effects.PotionEffectMap;
+import blusunrize.trauma.api.effects.IEffectTicking;
 import blusunrize.trauma.common.Trauma;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.MobEffects;
 
 /**
- * Slowness potion
+ * Occasional loss of XP
  *
  * @author BluSunrize
  * @since 23.09.2017
  */
-public class EffectSlowness implements IEffectPotion
+public class EffectAmnesia implements IEffectTicking
 {
 	@Override
 	public String getIndentifier()
 	{
-		return Trauma.MODID+":Slowness";
+		return Trauma.MODID+":Amnesia";
 	}
 
 	@Override
 	public String getDescription(EntityPlayer player, LimbCondition limbCondition)
 	{
-		return "desc.trauma.effect.slowness."+limbCondition.getState().getDamageIndex();
+		return "desc.trauma.effect.amnesia";
 	}
 
 	@Override
-	public void addToPotionMap(EntityPlayer player, LimbCondition limbCondition, PotionEffectMap map)
+	public void tick(EntityPlayer player, LimbCondition limbCondition)
 	{
-		int mod = limbCondition.getState().ordinal();
-		if(mod>=0)
-			map.modifyEffect(MobEffects.SLOWNESS, mod);
+		if((player.ticksExisted+(player.getRNG().nextInt(80)-40))%120==0)
+			player.addExperienceLevel(-1+player.getRNG().nextInt(3));
 	}
 }

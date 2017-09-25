@@ -19,7 +19,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 /**
- * Prevents jumping, functions as an EventHandler
+ * Reduced Miningspeed, functions as an EventHandler
  *
  * @author BluSunrize
  * @since 23.09.2017

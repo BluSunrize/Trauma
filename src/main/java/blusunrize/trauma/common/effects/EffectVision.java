@@ -16,6 +16,8 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
 
 /**
+ * Random application of vision-impairing effects
+ *
  * @author BluSunrize
  * @since 23.09.2017
  */

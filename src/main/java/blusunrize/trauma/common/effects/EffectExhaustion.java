@@ -13,6 +13,8 @@ import blusunrize.trauma.common.Trauma;
 import net.minecraft.entity.player.EntityPlayer;
 
 /**
+ * Regularly ticking exhaustion
+ *
  * @author BluSunrize
  * @since 23.09.2017
  */
