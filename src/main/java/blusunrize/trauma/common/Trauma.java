@@ -17,15 +17,17 @@ import blusunrize.trauma.api.effects.ITraumaEffect;
 import blusunrize.trauma.api.recovery.CapabilityRecoveryItem;
 import blusunrize.trauma.common.damageadapters.*;
 import blusunrize.trauma.common.effects.*;
-import blusunrize.trauma.common.items.ItemBase;
 import blusunrize.trauma.common.items.ItemCurative;
 import blusunrize.trauma.common.utils.EventHandler;
 import blusunrize.trauma.common.utils.TraumaPotion;
 import blusunrize.trauma.common.utils.commands.CommandTrauma;
 import blusunrize.trauma.common.utils.network.MessageApplyRecoveryItem;
 import blusunrize.trauma.common.utils.network.MessageTraumaStatusSync;
+import net.minecraft.init.Items;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
@@ -162,8 +164,19 @@ public class Trauma
 	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> event)
 	{
-		TraumaItems.MATERIAL = new ItemBase("material", "poppyextract").register(event);
-		TraumaItems.SPLINT = new ItemCurative("splint", limbCondition -> (limbCondition.getLimb().isArm()||limbCondition.getLimb().isLeg())&&limbCondition.getState().getDamageIndex()>0, 0, .66f, null).register(event);
+		TraumaItems.PAINKILLER = new ItemCurative("painkiller", new String[]{"poppyextract"}, (stack, limbCondition) -> limbCondition.getLimb()==EnumLimb.HEAD, 36000, (stack, limbCondition) -> 1f, (player, limbCondition) -> player.addPotionEffect(new PotionEffect(MobEffects.NAUSEA,160, 2))).register(event).setContainerItem(Items.BOWL);
+
+		TraumaItems.BANDAGE = new ItemCurative("bandage", new String[]{"normal", "medicated"}, (stack, limbCondition) -> {
+			if(limbCondition.getLimb().isLeg()||limbCondition.getLimb().isLeg())
+				return limbCondition.getState()==EnumTraumaState.LIGHT;
+			if(limbCondition.getLimb()==EnumLimb.ABDOMEN)
+				return limbCondition.getState().getDamageIndex()<2;
+			if(limbCondition.getLimb()==EnumLimb.CHEST)
+				return limbCondition.getState()==EnumTraumaState.MEDIUM;
+			return false;
+		},0, (stack, limbCondition) -> stack.getMetadata()==1?.66f:.8f, null).register(event);
+
+		TraumaItems.SPLINT = new ItemCurative("splint", (stack, limbCondition) -> (limbCondition.getLimb().isArm()||limbCondition.getLimb().isLeg())&&limbCondition.getState().getDamageIndex()>0, 0, (stack, limbCondition) -> .66f, null).register(event);
 	}
 
 

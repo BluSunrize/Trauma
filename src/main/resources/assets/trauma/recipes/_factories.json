@@ -1,0 +1,5 @@
+{
+  "recipes": {
+    "shapeless_tooldamage": "blusunrize.trauma.common.utils.crafting.RecipeFactoryShapelessToolDamage"
+  }
+}

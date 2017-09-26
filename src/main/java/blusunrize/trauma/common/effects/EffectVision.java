@@ -39,6 +39,8 @@ public class EffectVision implements IEffectTicking
 	public void tick(EntityPlayer player, LimbCondition limbCondition)
 	{
 		int freq = 360/limbCondition.getState().ordinal();
+		if(limbCondition.hasRecoveryItems("trauma:painkiller"))
+			freq *= 3;
 		if(player.getRNG().nextInt(freq)==0)
 		{
 			int type = player.getRNG().nextInt(3);

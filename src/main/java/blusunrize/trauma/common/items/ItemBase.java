@@ -15,6 +15,9 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author BluSunrize
  * @since 25.09.2017
@@ -23,6 +26,8 @@ public class ItemBase extends Item
 {
 	protected final ResourceLocation resource;
 	protected final String[] subnames;
+
+	public static final List<ItemBase> ITEMLIST = new ArrayList<>();
 
 	public ItemBase(String name, String... subnames)
 	{
@@ -46,8 +51,8 @@ public class ItemBase extends Item
 	@Override
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items)
 	{
-		if(this.subnames!=null&&this.isInCreativeTab(tab))
-			for(int i = 0; i < getSubtypeAmount(); i++)
+		if(this.subnames!=null&&this.subnames.length>0&&this.isInCreativeTab(tab))
+			for(int i = 0; i < subnames.length; i++)
 				items.add(new ItemStack(this, 1, i));
 		else
 			super.getSubItems(tab, items);
@@ -58,11 +63,6 @@ public class ItemBase extends Item
 		return resource;
 	}
 
-	public int getSubtypeAmount()
-	{
-		return this.subnames!=null?this.subnames.length: 1;
-	}
-
 	public String[] getSubnames()
 	{
 		return this.subnames;
@@ -71,6 +71,7 @@ public class ItemBase extends Item
 	public final Item register(RegistryEvent.Register<Item> event)
 	{
 		event.getRegistry().register(this);
+		ITEMLIST.add(this);
 		return this;
 	}
 }

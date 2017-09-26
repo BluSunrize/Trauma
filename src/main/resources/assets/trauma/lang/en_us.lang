@@ -1,8 +1,16 @@
 ï»¿ Byte Order Mark, because fuck you IntelliJ
 
+item.trauma.painkiller.poppyextract.name=Poppy Extract
+item.trauma.painkiller.poppyextract.desc=Lessens the effect of impaired vision
+item.trauma.bandage.normal.name=Bandage
+item.trauma.bandage.normal.desc=Hastens recovery of sprained limbs, broken ribs and bruised or lacerated abdomen
+item.trauma.bandage.medicated.name=Medicated Bandage
+item.trauma.bandage.normal.desc=Hastens recovery of sprained limbs, broken ribs and bruised or lacerated abdomen
 item.trauma.splint.name=Splint
-item.trauma.material.poppyextract.name=Poppy Extract
+item.trauma.splint.desc=Hastens recovery of broken limbs, reduces movement and action speed penalties
 
+desc.trauma.recovery.trauma:painkiller=Painkiller
+desc.trauma.recovery.trauma:bandage=Bandaged
 desc.trauma.recovery.trauma:splint=Splinted
 
 desc.trauma.limb.HEAD=Head

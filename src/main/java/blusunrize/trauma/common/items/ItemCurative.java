@@ -9,11 +9,20 @@ package blusunrize.trauma.common.items;
 
 import blusunrize.trauma.api.condition.LimbCondition;
 import blusunrize.trauma.api.recovery.IRecoveryItem;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
+import java.util.List;
 import java.util.function.BiConsumer;
-import java.util.function.Predicate;
+import java.util.function.BiFunction;
+import java.util.function.BiPredicate;
 
 /**
  * @author BluSunrize
@@ -21,23 +30,37 @@ import java.util.function.Predicate;
  */
 public class ItemCurative extends ItemBase implements IRecoveryItem
 {
-	private final Predicate<LimbCondition> applyPredicate;
+	private final BiPredicate<ItemStack, LimbCondition> applyPredicate;
 	private final int duration;
-	private final float modifier;
+	private final BiFunction<ItemStack, LimbCondition, Float> modifier;
 	private final BiConsumer<EntityPlayer, LimbCondition> usageConsumer;
 
-	public ItemCurative(String name, Predicate<LimbCondition> applyPredicate, int duration, float modifier, BiConsumer<EntityPlayer, LimbCondition> usageConsumer)
+	public ItemCurative(String name, String[] subNames, BiPredicate<ItemStack, LimbCondition> applyPredicate, int duration, BiFunction<ItemStack, LimbCondition, Float> modifier, BiConsumer<EntityPlayer, LimbCondition> usageConsumer)
 	{
-		super(name);
+		super(name, subNames);
 		this.applyPredicate = applyPredicate;
 		this.duration = duration;
 		this.modifier = modifier;
 		this.usageConsumer = usageConsumer;
 	}
 
-	public ItemCurative(String name, Predicate<LimbCondition> applyPredicate, int duration)
+	public ItemCurative(String name, BiPredicate<ItemStack, LimbCondition> applyPredicate, int duration, BiFunction<ItemStack, LimbCondition, Float> modifier, BiConsumer<EntityPlayer, LimbCondition> usageConsumer)
 	{
-		this(name, applyPredicate, duration, 1, null);
+		this(name, new String[0], applyPredicate, duration, modifier, null);
+	}
+
+	public ItemCurative(String name, BiPredicate<ItemStack, LimbCondition> applyPredicate, int duration)
+	{
+		this(name, applyPredicate, duration, (stack, limbCondition) -> 1f, null);
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
+	{
+		String flavourKey = getUnlocalizedName(stack)+".desc";
+		if(I18n.hasKey(flavourKey))
+			tooltip.add(TextFormatting.GRAY.toString()+ I18n.format(flavourKey));
 	}
 
 	@Override
@@ -49,7 +72,7 @@ public class ItemCurative extends ItemBase implements IRecoveryItem
 	@Override
 	public boolean canApply(ItemStack stack, EntityPlayer player, LimbCondition limbCondition)
 	{
-		return applyPredicate.test(limbCondition);
+		return applyPredicate.test(stack, limbCondition);
 	}
 
 	@Override
@@ -61,7 +84,7 @@ public class ItemCurative extends ItemBase implements IRecoveryItem
 	@Override
 	public float getRecoveryTimeModifier(ItemStack stack, EntityPlayer player, LimbCondition limbCondition)
 	{
-		return this.modifier;
+		return this.modifier.apply(stack, limbCondition);
 	}
 
 	@Override

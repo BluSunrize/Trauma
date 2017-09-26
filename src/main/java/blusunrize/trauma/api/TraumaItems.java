@@ -15,6 +15,7 @@ import net.minecraft.item.Item;
  */
 public class TraumaItems
 {
-	public static Item MATERIAL;
+	public static Item PAINKILLER;
+	public static Item BANDAGE;
 	public static Item SPLINT;
 }

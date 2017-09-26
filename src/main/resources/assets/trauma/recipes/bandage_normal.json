@@ -1,0 +1,18 @@
+{
+  "type": "trauma:shapeless_tooldamage",
+  "damage_tool": 1,
+  "result": {
+    "item": "trauma:bandage",
+    "data": 0,
+    "count": 2
+  },
+  "ingredients": [
+    {
+      "item": "minecraft:wool",
+      "data": 32767
+    },
+    {
+      "item": "minecraft:shears"
+    }
+  ]
+}

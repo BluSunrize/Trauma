@@ -1,0 +1,17 @@
+{
+  "type": "forge:ore_shapeless",
+  "result": {
+    "item": "trauma:bandage",
+    "data": 1
+  },
+  "ingredients": [
+    {
+      "item": "trauma:bandage",
+      "data": 0
+    },
+    {
+      "item": "trauma:painkiller",
+      "data": 0
+    }
+  ]
+}

@@ -9,7 +9,6 @@ package blusunrize.trauma.client;
 
 import blusunrize.trauma.api.TraumaApiLib;
 import blusunrize.trauma.api.TraumaApiUtils;
-import blusunrize.trauma.api.TraumaItems;
 import blusunrize.trauma.api.condition.*;
 import blusunrize.trauma.api.effects.ITraumaEffect;
 import blusunrize.trauma.api.recovery.CapabilityRecoveryItem;
@@ -47,9 +46,15 @@ public class ClientEventHandler
 	@SubscribeEvent
 	public void registerModels(ModelRegistryEvent event)
 	{
-		for(int i = 0; i<((ItemBase)TraumaItems.MATERIAL).getSubtypeAmount(); i++)
-			ModelLoader.setCustomModelResourceLocation(TraumaItems.MATERIAL, i, new ModelResourceLocation(((ItemBase)TraumaItems.MATERIAL).getRegistryLoc()+"_"+((ItemBase)TraumaItems.MATERIAL).getSubnames()[i]));
-		ModelLoader.setCustomModelResourceLocation(TraumaItems.SPLINT, 0, new ModelResourceLocation(Trauma.MODID+":splint"));
+		for(ItemBase item : ItemBase.ITEMLIST)
+		{
+			String[] subNames = item.getSubnames();
+			if(subNames!=null & subNames.length>0)
+				for(int i = 0; i < subNames.length; i++)
+					ModelLoader.setCustomModelResourceLocation(item, i, new ModelResourceLocation(item.getRegistryLoc()+"_"+subNames[i]));
+			else
+				ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryLoc().toString()));
+		}
 	}
 
 	@SubscribeEvent
