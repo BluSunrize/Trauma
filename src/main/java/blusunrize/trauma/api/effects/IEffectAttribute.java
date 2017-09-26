@@ -24,9 +24,9 @@ import javax.annotation.ParametersAreNonnullByDefault;
 public interface IEffectAttribute extends ITraumaEffect
 {
 	/**
-	 * @param player injured player
+	 * @param player        injured player
 	 * @param limbCondition the condition which has this effect applied
-	 * @param map A multimap of attribute name to modifiers
+	 * @param map           A multimap of attribute name to modifiers
 	 */
 	void gatherModifiers(EntityPlayer player, LimbCondition limbCondition, Multimap<String, AttributeModifier> map);
 }

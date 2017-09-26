@@ -23,15 +23,15 @@ public class DamageAdapterExplosion implements IDamageAdapter
 	public boolean handleDamage(EntityPlayer player, DamageSource damageSource, float amount)
 	{
 		boolean ret = false;
-		if(amount>=4)//That's enough for concussions
+		if(amount >= 4)//That's enough for concussions
 			ret |= TraumaApiUtils.damageLimb(player, EnumLimb.HEAD, 1);
-		if(amount>=12)//That's really bad
+		if(amount >= 12)//That's really bad
 		{
 			ret |= TraumaApiUtils.damageLimb(player, EnumLimb.CHEST, 1);
 			ret |= TraumaApiUtils.damageLimb(player, EnumLimb.ABDOMEN, 1);
 		}
-		else if(amount>=8)
-			ret |= TraumaApiUtils.damageLimb(player, player.getRNG().nextBoolean()?EnumLimb.CHEST:EnumLimb.ABDOMEN, 1);
+		else if(amount >= 8)
+			ret |= TraumaApiUtils.damageLimb(player, player.getRNG().nextBoolean()?EnumLimb.CHEST: EnumLimb.ABDOMEN, 1);
 		return ret;
 	}
 }

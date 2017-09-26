@@ -41,13 +41,13 @@ public class TraumaApiLib
 	 */
 	public static boolean isIgnoredDamage(@Nullable DamageSource damageSource)
 	{
-		return damageSource!=null && IGNORED_DAMAGES.contains(damageSource.damageType);
+		return damageSource!=null&&IGNORED_DAMAGES.contains(damageSource.damageType);
 	}
 
 	public static Map<EnumLimb, int[]> RECOVERY_TIMES;
 
 	/**
-	 * @param limb the queried limh
+	 * @param limb  the queried limh
 	 * @param state the state of the queried limb
 	 * @return the recovery time. Long because it may very well be a long time
 	 */
@@ -58,12 +58,13 @@ public class TraumaApiLib
 		return RECOVERY_TIMES.get(limb)[state.ordinal()-1];
 	}
 
-	private static ArrayListMultimap<ImmutablePair<EnumLimb,EnumTraumaState>, ITraumaEffect> EFFECT_MUTLIMAP = ArrayListMultimap.create();
+	private static ArrayListMultimap<ImmutablePair<EnumLimb, EnumTraumaState>, ITraumaEffect> EFFECT_MUTLIMAP = ArrayListMultimap.create();
 
 	/**
 	 * Registers a ITraumaEffect for the relevant limb condition
-	 * @param limb the limb this can apply to
-	 * @param state the state of the limb this applies in
+	 *
+	 * @param limb   the limb this can apply to
+	 * @param state  the state of the limb this applies in
 	 * @param effect the effect to register
 	 */
 	public static void registerEffect(EnumLimb limb, EnumTraumaState state, ITraumaEffect effect)
@@ -72,7 +73,7 @@ public class TraumaApiLib
 	}
 
 	/**
-	 * @param limb the limb queried
+	 * @param limb  the limb queried
 	 * @param state the state of the limb
 	 * @return a list of all registered ITraumaEffects
 	 */
@@ -85,8 +86,9 @@ public class TraumaApiLib
 
 	/**
 	 * Registers a damage adapter to any source of the given name
+	 *
 	 * @param damageSource the name of the source, e.g. "fall"
-	 * @param adapter the adapter
+	 * @param adapter      the adapter
 	 */
 	public static void registerDamageAdapter(String damageSource, IDamageAdapter adapter)
 	{

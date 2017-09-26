@@ -92,7 +92,7 @@ public class EventHandler
 			double attackHeight = attacker.posY+attacker.height/2-player.posY;
 			if(attackHeight > 1.5)//head
 				limb = EnumLimb.HEAD;
-			else if(attackHeight<.75)
+			else if(attackHeight < .75)
 				limb = player.getRNG().nextBoolean()?EnumLimb.LEG_LEFT: EnumLimb.LEG_RIGHT;
 			else
 				limb = EnumLimb.values()[1+player.getRNG().nextInt(4)];//Random limb in the Torso area
@@ -110,7 +110,7 @@ public class EventHandler
 	@SubscribeEvent(priority = EventPriority.LOW)
 	public void onPlayerTick(TickEvent.PlayerTickEvent event)
 	{
-		if(event.phase==Phase.END && Utils.shouldTick(event.player))
+		if(event.phase==Phase.END&&Utils.shouldTick(event.player))
 		{
 			TraumaStatus status = event.player.getCapability(CapabilityTrauma.TRAUMA_CAPABILITY, null);
 			PotionEffectMap potionEffectMap = new PotionEffectMap();
@@ -131,10 +131,10 @@ public class EventHandler
 			}
 			if(!potionEffectMap.isEmpty())
 				for(Map.Entry<Potion, Integer> entry : potionEffectMap.entrySet())
-					if(entry.getValue()>=1)
+					if(entry.getValue() >= 1)
 					{
 						PotionEffect effect = event.player.getActivePotionEffect(entry.getKey());
-						if(effect==null || effect.getDuration()<=20)//Reset potion effects only when they get low
+						if(effect==null||effect.getDuration() <= 20)//Reset potion effects only when they get low
 							event.player.addPotionEffect(new PotionEffect(entry.getKey(), 80, entry.getValue()-1, false, false));
 					}
 			if(!attributeMap.isEmpty())

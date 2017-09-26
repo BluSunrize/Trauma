@@ -22,7 +22,7 @@ public class DamageAdapterDrowning implements IDamageAdapter
 	@Override
 	public boolean handleDamage(EntityPlayer player, DamageSource damageSource, float amount)
 	{
-		if(player.getRNG().nextInt(15)==0 && TraumaApiUtils.damageLimb(player, EnumLimb.CHEST, 1))
+		if(player.getRNG().nextInt(15)==0&&TraumaApiUtils.damageLimb(player, EnumLimb.CHEST, 1))
 			return true;
 		return false;
 	}

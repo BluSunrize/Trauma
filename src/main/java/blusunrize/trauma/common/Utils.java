@@ -24,7 +24,7 @@ public class Utils
 {
 	public static void sendSyncPacket(EntityPlayer player)
 	{
-		if(!player.world.isRemote && player instanceof EntityPlayerMP)
+		if(!player.world.isRemote&&player instanceof EntityPlayerMP)
 			Trauma.packetHandler.sendTo(new MessageTraumaStatusSync(player, player.getCapability(CapabilityTrauma.TRAUMA_CAPABILITY, null)), (EntityPlayerMP)player);
 	}
 
@@ -56,9 +56,10 @@ public class Utils
 
 	static long UUIDBase = 109406002018L;
 	static long UUIDAdd = 01L;
+
 	public static UUID generateNewUUID()
 	{
-		UUID uuid = new UUID(UUIDBase,UUIDAdd);
+		UUID uuid = new UUID(UUIDBase, UUIDAdd);
 		UUIDAdd++;
 		return uuid;
 	}

@@ -51,7 +51,7 @@ public class CommandTrauma extends CommandBase
 		{
 			if("get".equals(args[0]))
 			{
-				EntityPlayer player = getPlayerOrSender(server, sender, args.length>1?args[1]:null);
+				EntityPlayer player = getPlayerOrSender(server, sender, args.length > 1?args[1]: null);
 				TraumaStatus status = player.getCapability(CapabilityTrauma.TRAUMA_CAPABILITY, null);
 				String msg = "Status: "+status;
 				if(status!=null)
@@ -63,7 +63,7 @@ public class CommandTrauma extends CommandBase
 			}
 			else if("set".equals(args[0]))
 			{
-				if(args.length<3)
+				if(args.length < 3)
 					throw new WrongUsageException("chat.trauma.command.usage.set", new Object[0]);
 				EnumLimb limb = (EnumLimb)Utils.parseEnum(args[1], EnumLimb.class);
 				if(limb==null)
@@ -72,14 +72,14 @@ public class CommandTrauma extends CommandBase
 				if(state==null)
 					throw new CommandException("chat.trauma.command.error.state", args[2]);
 
-				EntityPlayer player = getPlayerOrSender(server, sender, args.length>3?args[3]:null);
+				EntityPlayer player = getPlayerOrSender(server, sender, args.length > 3?args[3]: null);
 				if(player!=null)
 				{
 					if(TraumaApiUtils.setLimbState(player, limb, state, true))
 					{
 						if(state==EnumTraumaState.NONE)
 
-						Utils.sendSyncPacket(player);
+							Utils.sendSyncPacket(player);
 						sender.sendMessage(new TextComponentTranslation("chat.trauma.command.set.success", new TextComponentTranslation(limb.getUnlocalizedName()), new TextComponentTranslation(TraumaApiUtils.getUnlocalizedDamage(limb, state))));
 					}
 				}
@@ -92,11 +92,11 @@ public class CommandTrauma extends CommandBase
 	{
 		if(args.length==1)
 		{
-			return getListOfStringsMatchingLastWord(args, "get","set");
+			return getListOfStringsMatchingLastWord(args, "get", "set");
 		}
-		else if(args.length>1)
+		else if(args.length > 1)
 		{
-			if("get".equals(args[0]) && args.length==2)//optional players on get
+			if("get".equals(args[0])&&args.length==2)//optional players on get
 				return getListOfStringsMatchingLastWord(args, server.getOnlinePlayerNames());
 			else if("set".equals(args[0]))
 			{

@@ -26,7 +26,7 @@ public class DamageAdapterFall implements IDamageAdapter
 		int steps = (int)Math.ceil(amount/5);
 		if(amount > 3&&player.getRNG().nextInt(10) < amount)//Both legs, chances increase with damage
 		{
-			if(TraumaApiUtils.damageLimb(player, leg, steps) || TraumaApiUtils.damageLimb(player, leg.getOpposite(), steps))
+			if(TraumaApiUtils.damageLimb(player, leg, steps)||TraumaApiUtils.damageLimb(player, leg.getOpposite(), steps))
 				return true;
 		}
 		else if(amount >= 1)

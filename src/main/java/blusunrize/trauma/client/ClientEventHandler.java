@@ -49,7 +49,7 @@ public class ClientEventHandler
 		for(ItemBase item : ItemBase.ITEMLIST)
 		{
 			String[] subNames = item.getSubnames();
-			if(subNames!=null & subNames.length>0)
+			if(subNames!=null&subNames.length > 0)
 				for(int i = 0; i < subNames.length; i++)
 					ModelLoader.setCustomModelResourceLocation(item, i, new ModelResourceLocation(item.getRegistryLoc()+"_"+subNames[i]));
 			else
@@ -82,11 +82,11 @@ public class ClientEventHandler
 					if(limbCondition.getRecoveryTimer() > 0)
 						formattedState += " "+ClientUtils.ticksToFormattedTime(limbCondition.getRecoveryTimer());
 					text.add(formattedState);
-					for(Entry<String,Integer> recoveryItem : limbCondition.getRecoveryItems().entrySet())
+					for(Entry<String, Integer> recoveryItem : limbCondition.getRecoveryItems().entrySet())
 					{
 						int timer = recoveryItem.getValue();
 						String item = TextFormatting.GRAY+I18n.format("desc.trauma.recovery."+recoveryItem.getKey());
-						if(timer>0)
+						if(timer > 0)
 							item += " "+ClientUtils.ticksToFormattedTime(timer);
 						text.add(item);
 					}
@@ -94,7 +94,7 @@ public class ClientEventHandler
 					for(ITraumaEffect effect : limbCondition.getEffects().values())
 						text.add(" "+TextFormatting.DARK_GRAY+I18n.format(effect.getDescription(player, limbCondition)));
 
-					if(iRecoveryItem!=null && iRecoveryItem.canApply(held, player, limbCondition)  && !limbCondition.hasRecoveryItems(iRecoveryItem.getIdentifier(held)))
+					if(iRecoveryItem!=null&&iRecoveryItem.canApply(held, player, limbCondition)&&!limbCondition.hasRecoveryItems(iRecoveryItem.getIdentifier(held)))
 						text.add(TextFormatting.DARK_GRAY+I18n.format("desc.trauma.useItem", held.getDisplayName()));
 
 					event.getGui().drawHoveringText(text, event.getMouseX(), event.getMouseY());
@@ -107,7 +107,7 @@ public class ClientEventHandler
 	@SubscribeEvent
 	public void onMouseEvent(MouseInputEvent.Pre event)
 	{
-		if(Mouse.getEventButtonState() && event.getGui() instanceof GuiInventory && Mouse.getEventButton()==0)
+		if(Mouse.getEventButtonState()&&event.getGui() instanceof GuiInventory&&Mouse.getEventButton()==0)
 		{
 			EntityPlayer player = Trauma.proxy.getClientPlayer();
 			ItemStack held = player.inventory.getItemStack();
@@ -127,7 +127,7 @@ public class ClientEventHandler
 					if(gui.isPointInRegion(rect[0], rect[1], rect[2], rect[3], mouseX, mouseY))
 					{
 						LimbCondition limbCondition = status.getLimbCondition(limb);
-						if(iRecoveryItem.canApply(held, player, limbCondition) && !limbCondition.hasRecoveryItems(iRecoveryItem.getIdentifier(held)))
+						if(iRecoveryItem.canApply(held, player, limbCondition)&&!limbCondition.hasRecoveryItems(iRecoveryItem.getIdentifier(held)))
 						{
 							limbCondition.addRecoveryItem(iRecoveryItem.getIdentifier(held), iRecoveryItem.getDuration(held, player, limbCondition));
 							held.shrink(1);

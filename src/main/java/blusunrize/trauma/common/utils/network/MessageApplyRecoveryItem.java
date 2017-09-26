@@ -80,7 +80,7 @@ public class MessageApplyRecoveryItem implements IMessage
 							TraumaStatus status = entity.getCapability(CapabilityTrauma.TRAUMA_CAPABILITY, null);
 							LimbCondition limbCondition = status.getLimbCondition(message.limb);
 							limbCondition.addRecoveryItem(iRecoveryItem.getIdentifier(held), iRecoveryItem.getDuration(held, (EntityPlayer)entity, limbCondition));
-							int newTimer = Math.round(limbCondition.getRecoveryTimer() * iRecoveryItem.getRecoveryTimeModifier(held, (EntityPlayer)entity, limbCondition));
+							int newTimer = Math.round(limbCondition.getRecoveryTimer()*iRecoveryItem.getRecoveryTimeModifier(held, (EntityPlayer)entity, limbCondition));
 							limbCondition.setRecoveryTimer(newTimer);
 							iRecoveryItem.onApply(held, (EntityPlayer)entity, limbCondition);
 							held.shrink(1);

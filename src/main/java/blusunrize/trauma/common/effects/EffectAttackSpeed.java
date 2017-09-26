@@ -37,13 +37,13 @@ public class EffectAttackSpeed implements IEffectAttribute
 	@Override
 	public String getDescription(EntityPlayer player, LimbCondition limbCondition)
 	{
-		return "desc.trauma.effect.attackspeed."+(limbCondition.getState().getDamageIndex()-(limbCondition.hasRecoveryItems("trauma:splint")?1:0));
+		return "desc.trauma.effect.attackspeed."+(limbCondition.getState().getDamageIndex()-(limbCondition.hasRecoveryItems("trauma:splint")?1: 0));
 	}
 
 	@Override
 	public void gatherModifiers(EntityPlayer player, LimbCondition limbCondition, Multimap<String, AttributeModifier> map)
 	{
-		float mod = .16f + .24f*(limbCondition.getState().ordinal()-(limbCondition.hasRecoveryItems("trauma:splint")?1:0));
+		float mod = .16f+.24f*(limbCondition.getState().ordinal()-(limbCondition.hasRecoveryItems("trauma:splint")?1: 0));
 		map.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, getIndentifier(), -mod, 2));
 	}
 }

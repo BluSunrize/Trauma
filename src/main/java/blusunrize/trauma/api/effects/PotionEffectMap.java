@@ -23,8 +23,9 @@ public class PotionEffectMap extends HashMap<Potion, Integer>
 {
 	/**
 	 * Modifies current value for given potion, adds effect to map if it doesn't exist otherwise
+	 *
 	 * @param potion given Potion
-	 * @param mod modifier
+	 * @param mod    modifier
 	 */
 	public void modifyEffect(Potion potion, int mod)
 	{

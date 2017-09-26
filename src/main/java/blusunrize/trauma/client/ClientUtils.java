@@ -17,11 +17,11 @@ public class ClientUtils
 {
 	public static String ticksToFormattedTime(long ticks)
 	{
-		long seconds = ticks / 20;
-		long minutes = seconds / 60;
-		long hours = minutes / 60;
-		seconds = seconds % 60;
-		minutes = minutes % 60;
-		return (hours>0?String.format("%02d",hours)+":":"")+String.format("%02d",minutes)+":"+String.format("%02d",seconds);
+		long seconds = ticks/20;
+		long minutes = seconds/60;
+		long hours = minutes/60;
+		seconds = seconds%60;
+		minutes = minutes%60;
+		return (hours > 0?String.format("%02d", hours)+":": "")+String.format("%02d", minutes)+":"+String.format("%02d", seconds);
 	}
 }

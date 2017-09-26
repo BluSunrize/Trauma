@@ -34,7 +34,8 @@ public enum EnumTraumaState
 		this.textColor = textColor;
 	}
 
-	static{
+	static
+	{
 		DAMAGED_STATES = new EnumTraumaState[]{LIGHT, MEDIUM, HEAVY};
 		EQUAL_OR_WORSE_STATES.put(NONE, new EnumTraumaState[]{NONE, LIGHT, MEDIUM, HEAVY});
 		EQUAL_OR_WORSE_STATES.put(LIGHT, new EnumTraumaState[]{LIGHT, MEDIUM, HEAVY});

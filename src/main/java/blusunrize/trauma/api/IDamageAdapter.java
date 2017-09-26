@@ -21,9 +21,10 @@ public interface IDamageAdapter
 {
 	/**
 	 * Fired on every LivingHurtEvent involving a player, provided this was registered to the given damage source
-	 * @param player the player hurt
+	 *
+	 * @param player       the player hurt
 	 * @param damageSource the damagesource, given for projectile + attacker entities
-	 * @param amount the amount of damage
+	 * @param amount       the amount of damage
 	 * @return true to send a Sync package (do this if you changed any conditions)
 	 */
 	boolean handleDamage(EntityPlayer player, DamageSource damageSource, float amount);

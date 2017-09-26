@@ -63,6 +63,7 @@ public class LimbCondition
 
 	/**
 	 * Sets the TraumaState of the condition
+	 *
 	 * @param state the given state
 	 */
 	public void setState(EnumTraumaState state)
@@ -80,6 +81,7 @@ public class LimbCondition
 
 	/**
 	 * Sets the timer (in ticks) until the limb recovers
+	 *
 	 * @param recoveryTimer
 	 */
 	public void setRecoveryTimer(long recoveryTimer)
@@ -105,6 +107,7 @@ public class LimbCondition
 
 	/**
 	 * Applies a recovery item, saved by its unique String key
+	 *
 	 * @param item
 	 */
 	public void addRecoveryItem(String item, int timer)
@@ -122,6 +125,7 @@ public class LimbCondition
 
 	/**
 	 * Adds an ITraumaEffect to the condition. Expires with the recovery timer
+	 *
 	 * @param effect
 	 */
 	public void addEffect(ITraumaEffect effect)
@@ -140,6 +144,7 @@ public class LimbCondition
 
 	/**
 	 * Removes an effect by its identifier
+	 *
 	 * @param ident
 	 */
 	public void removeEffect(String ident)
@@ -149,6 +154,7 @@ public class LimbCondition
 
 	/**
 	 * Removes all ITraumaEffects from this limb, along with possible Attribute modifiers
+	 *
 	 * @param player
 	 */
 	public void clearEffects(EntityPlayer player)
@@ -176,7 +182,7 @@ public class LimbCondition
 				else
 					this.recoveryItems.put(item, val);
 		}
-		if(this.recoveryTimer>0 && --this.recoveryTimer<=0)
+		if(this.recoveryTimer > 0&&--this.recoveryTimer <= 0)
 		{
 			cure(player);
 			return true;
@@ -186,8 +192,9 @@ public class LimbCondition
 
 	/**
 	 * Sets the state, recovery timer and all associated effects
+	 *
 	 * @param player the Player
-	 * @param state given TraumaState
+	 * @param state  given TraumaState
 	 */
 	public void assumeState(EntityPlayer player, EnumTraumaState state)
 	{
@@ -235,7 +242,7 @@ public class LimbCondition
 		limbCondition.setState(EnumTraumaState.values()[nbt.getInteger("state")]);
 		limbCondition.setRecoveryTimer(nbt.getLong("recoveryTimer"));
 		NBTTagList recItems = nbt.getTagList("recoveryItems", 10);
-		for(int i=0; i<recItems.tagCount(); i++)
+		for(int i = 0; i < recItems.tagCount(); i++)
 		{
 			NBTTagCompound tag = recItems.getCompoundTagAt(i);
 			limbCondition.addRecoveryItem(tag.getString("item"), tag.getInteger("timer"));

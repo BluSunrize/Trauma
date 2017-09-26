@@ -51,7 +51,7 @@ public class ItemBase extends Item
 	@Override
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items)
 	{
-		if(this.subnames!=null&&this.subnames.length>0&&this.isInCreativeTab(tab))
+		if(this.subnames!=null&&this.subnames.length > 0&&this.isInCreativeTab(tab))
 			for(int i = 0; i < subnames.length; i++)
 				items.add(new ItemStack(this, 1, i));
 		else

@@ -17,12 +17,12 @@ import net.minecraft.util.ResourceLocation;
  */
 public class TraumaPotion extends Potion
 {
-	private static final ResourceLocation TEXTURE = new ResourceLocation("trauma","textures/potioneffects.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation("trauma", "textures/potioneffects.png");
 
 	public TraumaPotion(ResourceLocation resource, boolean isBadEffectIn, int liquidColorIn, int icon)
 	{
 		super(isBadEffectIn, liquidColorIn);
-		this.setPotionName("potion." + resource.toString());
+		this.setPotionName("potion."+resource.toString());
 		this.setRegistryName(resource);
 		this.setIconIndex(icon%8, icon/8);
 	}

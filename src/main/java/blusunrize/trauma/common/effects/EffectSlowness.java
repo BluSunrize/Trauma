@@ -31,14 +31,14 @@ public class EffectSlowness implements IEffectPotion
 	@Override
 	public String getDescription(EntityPlayer player, LimbCondition limbCondition)
 	{
-		return "desc.trauma.effect.slowness."+(limbCondition.getState().getDamageIndex()-(limbCondition.hasRecoveryItems("trauma:splint")?1:0));
+		return "desc.trauma.effect.slowness."+(limbCondition.getState().getDamageIndex()-(limbCondition.hasRecoveryItems("trauma:splint")?1: 0));
 	}
 
 	@Override
 	public void addToPotionMap(EntityPlayer player, LimbCondition limbCondition, PotionEffectMap map)
 	{
-		int mod = limbCondition.getState().ordinal()-(limbCondition.hasRecoveryItems("trauma:splint")?1:0);
-		if(mod>=0)
+		int mod = limbCondition.getState().ordinal()-(limbCondition.hasRecoveryItems("trauma:splint")?1: 0);
+		if(mod >= 0)
 			map.modifyEffect(MobEffects.SLOWNESS, mod);
 	}
 }

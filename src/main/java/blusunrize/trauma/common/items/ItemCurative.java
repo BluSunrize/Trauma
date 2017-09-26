@@ -60,7 +60,7 @@ public class ItemCurative extends ItemBase implements IRecoveryItem
 	{
 		String flavourKey = getUnlocalizedName(stack)+".desc";
 		if(I18n.hasKey(flavourKey))
-			tooltip.add(TextFormatting.GRAY.toString()+ I18n.format(flavourKey));
+			tooltip.add(TextFormatting.GRAY.toString()+I18n.format(flavourKey));
 	}
 
 	@Override

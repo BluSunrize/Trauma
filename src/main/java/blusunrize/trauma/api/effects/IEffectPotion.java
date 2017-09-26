@@ -22,9 +22,9 @@ import javax.annotation.ParametersAreNonnullByDefault;
 public interface IEffectPotion extends ITraumaEffect
 {
 	/**
-	 * @param player injured player
+	 * @param player        injured player
 	 * @param limbCondition the condition which has this effect applied
-	 * @param map A map of Potion->Amplifier, increase if potion is already present
+	 * @param map           A map of Potion->Amplifier, increase if potion is already present
 	 */
 	void addToPotionMap(EntityPlayer player, LimbCondition limbCondition, PotionEffectMap map);
 }

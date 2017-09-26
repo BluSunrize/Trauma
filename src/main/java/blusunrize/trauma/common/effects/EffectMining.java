@@ -40,7 +40,7 @@ public class EffectMining implements ITraumaEffect
 	@Override
 	public String getDescription(EntityPlayer player, LimbCondition limbCondition)
 	{
-		return "desc.trauma.effect.mining."+(limbCondition.getState().getDamageIndex()-(limbCondition.hasRecoveryItems("trauma:splint")?1:0));
+		return "desc.trauma.effect.mining."+(limbCondition.getState().getDamageIndex()-(limbCondition.hasRecoveryItems("trauma:splint")?1: 0));
 	}
 
 	@SubscribeEvent
@@ -51,7 +51,7 @@ public class EffectMining implements ITraumaEffect
 		LimbCondition limbCondition = status.getLimbCondition(EnumLimb.ARM_MAIN);
 		if(limbCondition.hasEffect(getIndentifier()))
 		{
-			float mod = .68f - (.32f * (status.getLimbCondition(EnumLimb.ARM_MAIN).getState().getDamageIndex()-(limbCondition.hasRecoveryItems("trauma:splint")?1:0)));
+			float mod = .68f-(.32f*(status.getLimbCondition(EnumLimb.ARM_MAIN).getState().getDamageIndex()-(limbCondition.hasRecoveryItems("trauma:splint")?1: 0)));
 			event.setNewSpeed(mod*event.getOriginalSpeed());
 		}
 	}
