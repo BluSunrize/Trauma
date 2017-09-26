@@ -47,4 +47,12 @@ public interface IRecoveryItem
 	 * @return a modifier to adjust the conditions recovery time on application
 	 */
 	default float getRecoveryTimeModifier(ItemStack stack, EntityPlayer player, LimbCondition limbCondition) { return 1; }
+
+	/**
+	 * @param stack
+	 * @param player
+	 * @param limbCondition
+	 * @return fired serverside when the item is applied
+	 */
+	default void onApply(ItemStack stack, EntityPlayer player, LimbCondition limbCondition) { }
 }

@@ -163,7 +163,7 @@ public class Trauma
 	public static void registerItems(RegistryEvent.Register<Item> event)
 	{
 		TraumaItems.MATERIAL = new ItemBase("material", "poppyextract").register(event);
-		TraumaItems.SPLINT = new ItemCurative("splint", limbCondition -> (limbCondition.getLimb().isArm()||limbCondition.getLimb().isLeg())&&limbCondition.getState().getDamageIndex()>0, 0, .66f).register(event);
+		TraumaItems.SPLINT = new ItemCurative("splint", limbCondition -> (limbCondition.getLimb().isArm()||limbCondition.getLimb().isLeg())&&limbCondition.getState().getDamageIndex()>0, 0, .66f, null).register(event);
 	}
 
 

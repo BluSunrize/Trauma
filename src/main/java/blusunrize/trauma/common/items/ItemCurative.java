@@ -12,6 +12,7 @@ import blusunrize.trauma.api.recovery.IRecoveryItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
+import java.util.function.BiConsumer;
 import java.util.function.Predicate;
 
 /**
@@ -23,18 +24,20 @@ public class ItemCurative extends ItemBase implements IRecoveryItem
 	private final Predicate<LimbCondition> applyPredicate;
 	private final int duration;
 	private final float modifier;
+	private final BiConsumer<EntityPlayer, LimbCondition> usageConsumer;
 
-	public ItemCurative(String name, Predicate<LimbCondition> applyPredicate, int duration, float modifier)
+	public ItemCurative(String name, Predicate<LimbCondition> applyPredicate, int duration, float modifier, BiConsumer<EntityPlayer, LimbCondition> usageConsumer)
 	{
 		super(name);
 		this.applyPredicate = applyPredicate;
 		this.duration = duration;
 		this.modifier = modifier;
+		this.usageConsumer = usageConsumer;
 	}
 
 	public ItemCurative(String name, Predicate<LimbCondition> applyPredicate, int duration)
 	{
-		this(name, applyPredicate, duration, 1);
+		this(name, applyPredicate, duration, 1, null);
 	}
 
 	@Override
@@ -59,5 +62,12 @@ public class ItemCurative extends ItemBase implements IRecoveryItem
 	public float getRecoveryTimeModifier(ItemStack stack, EntityPlayer player, LimbCondition limbCondition)
 	{
 		return this.modifier;
+	}
+
+	@Override
+	public void onApply(ItemStack stack, EntityPlayer player, LimbCondition limbCondition)
+	{
+		if(this.usageConsumer!=null)
+			this.usageConsumer.accept(player, limbCondition);
 	}
 }
