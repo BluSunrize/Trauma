@@ -53,6 +53,7 @@ desc.trauma.effect.vision=Impaired Vision
 desc.trauma.effect.amnesia=Anterograde Amnesia
 #Chest
 desc.trauma.effect.exhaustion=Increased Exhaustion
+desc.trauma.effect.breath=Reduced Breath
 #Abdomen
 desc.trauma.effect.bleeding=Internal Bleeding
 #Main Arm

@@ -110,18 +110,22 @@ public class Trauma
 			TraumaApiLib.registerEffect(EnumLimb.HEAD, state, effect);//Vision
 			TraumaApiLib.registerEffect(EnumLimb.HEAD, state, effect2);//Amnesia
 		}
-		effect2 = new EffectBleeding();
-		TraumaApiLib.registerEffect(EnumLimb.HEAD, EnumTraumaState.HEAVY, effect2);//Internal Bleeding
+		ITraumaEffect effect3 = new EffectBleeding();
+		TraumaApiLib.registerEffect(EnumLimb.HEAD, EnumTraumaState.HEAVY, effect3);//Internal Bleeding
 
 		/*Chest*/
 		effect = new EffectExhaustion();
+		effect2 = new EffectBreath();
 		for(EnumTraumaState state : EnumTraumaState.DAMAGED_STATES)
+		{
 			TraumaApiLib.registerEffect(EnumLimb.CHEST, state, effect);//Exhaustion
-		TraumaApiLib.registerEffect(EnumLimb.HEAD, EnumTraumaState.HEAVY, effect2);//Internal Bleeding
+			TraumaApiLib.registerEffect(EnumLimb.CHEST, state, effect2);//Breath
+		}
+		TraumaApiLib.registerEffect(EnumLimb.CHEST, EnumTraumaState.HEAVY, effect3);//Internal Bleeding
 
 		/*Abdomen*/
 		for(EnumTraumaState state : EnumTraumaState.EQUAL_OR_WORSE_STATES.get(EnumTraumaState.MEDIUM))
-			TraumaApiLib.registerEffect(EnumLimb.ABDOMEN, state, effect2);//Internal Bleeding
+			TraumaApiLib.registerEffect(EnumLimb.ABDOMEN, state, effect3);//Internal Bleeding
 
 		/*Arms*/
 		effect = new EffectMining();
