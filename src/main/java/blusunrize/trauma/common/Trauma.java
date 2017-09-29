@@ -135,6 +135,9 @@ public class Trauma
 			TraumaApiLib.registerEffect(EnumLimb.ARM_MAIN, state, effect);
 			TraumaApiLib.registerEffect(EnumLimb.ARM_MAIN, state, effect2);
 		}
+		effect = new EffectArrowImprecision();
+		for(EnumTraumaState state : EnumTraumaState.DAMAGED_STATES)
+			TraumaApiLib.registerEffect(EnumLimb.ARM_OFFHAND, state, effect);
 		effect = new EffectOffhandDisable();
 		TraumaApiLib.registerEffect(EnumLimb.ARM_OFFHAND, EnumTraumaState.HEAVY, effect);
 
