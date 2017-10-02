@@ -73,4 +73,11 @@ public class TraumaApiUtils
 		}
 		return false;
 	}
+
+	public static void clearPlayer(EntityPlayer player)
+	{
+		TraumaStatus status = player.getCapability(CapabilityTrauma.TRAUMA_CAPABILITY, null);
+		for(EnumLimb limb : EnumLimb.values())
+			status.getLimbCondition(limb).cure(player);
+	}
 }

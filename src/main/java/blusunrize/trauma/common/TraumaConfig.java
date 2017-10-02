@@ -46,6 +46,9 @@ public class TraumaConfig
 	@Comment("The amount of time (in ticks) it takes for leg injuries to heal. Array sorted by severity, light, medium, heavy")
 	public static int[] recovery_legs = {24000, 72000, 168000};
 
+	@Comment("Whether LimbConditions should be healed upon dying+respawning")
+	public static boolean clearOnDeath = true;
+
 	public static void loadConfig()
 	{
 		TraumaApiLib.IGNORED_DAMAGES = Sets.newHashSet(ignoredDamages);

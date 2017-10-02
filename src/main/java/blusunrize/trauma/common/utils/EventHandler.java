@@ -15,6 +15,7 @@ import blusunrize.trauma.api.condition.EnumLimb;
 import blusunrize.trauma.api.condition.LimbCondition;
 import blusunrize.trauma.api.condition.TraumaStatus;
 import blusunrize.trauma.api.effects.*;
+import blusunrize.trauma.common.TraumaConfig;
 import blusunrize.trauma.common.Utils;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
@@ -26,6 +27,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -76,7 +78,7 @@ public class EventHandler
 		Entity projectile = event.getSource().getImmediateSource();
 		Entity attacker = event.getSource().getTrueSource();
 
-		EnumLimb limb = null;
+		EnumLimb limb;
 		if(projectile!=null&&!projectile.equals(attacker)&&!(projectile instanceof EntityLivingBase))//projectile exists and is not living
 		{
 			double headRelation = projectile.posY-(player.posY+1.75);
@@ -146,5 +148,15 @@ public class EventHandler
 	public void onLogin(PlayerEvent.PlayerLoggedInEvent event)
 	{
 		Utils.sendSyncPacket(event.player);
+	}
+
+	@SubscribeEvent
+	public void onLivingDeath(LivingDeathEvent event)
+	{
+		if(event.getEntityLiving() instanceof EntityPlayer&&!((EntityPlayer)event.getEntityLiving()).world.isRemote&&TraumaConfig.clearOnDeath)
+		{
+			TraumaApiUtils.clearPlayer((EntityPlayer)event.getEntityLiving());
+			Utils.sendSyncPacket((EntityPlayer)event.getEntityLiving());
+		}
 	}
 }
