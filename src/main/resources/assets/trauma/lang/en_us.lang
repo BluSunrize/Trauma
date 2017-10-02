@@ -55,6 +55,7 @@ desc.trauma.effect.amnesia=Anterograde Amnesia
 desc.trauma.effect.exhaustion=Increased Exhaustion
 desc.trauma.effect.breath=Reduced Breath
 #Abdomen
+desc.trauma.effect.reducedsaturation=Reduced Food & Potion effectiveness
 desc.trauma.effect.bleeding=Internal Bleeding
 #Main Arm
 desc.trauma.effect.mining.0=-32%% Mining Speed

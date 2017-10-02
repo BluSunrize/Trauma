@@ -124,6 +124,9 @@ public class Trauma
 		TraumaApiLib.registerEffect(EnumLimb.CHEST, EnumTraumaState.HEAVY, effect3);//Internal Bleeding
 
 		/*Abdomen*/
+		effect = new EffectReducedSaturation();
+		for(EnumTraumaState state : EnumTraumaState.DAMAGED_STATES)
+			TraumaApiLib.registerEffect(EnumLimb.ABDOMEN, state, effect);//Reduced Saturation
 		for(EnumTraumaState state : EnumTraumaState.EQUAL_OR_WORSE_STATES.get(EnumTraumaState.MEDIUM))
 			TraumaApiLib.registerEffect(EnumLimb.ABDOMEN, state, effect3);//Internal Bleeding
 
