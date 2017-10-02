@@ -66,6 +66,9 @@ public class EventHandler
 		if(TraumaApiLib.isIgnoredDamage(damageSource))
 			return;
 
+		if(!TraumaConfig.ignoreAbsorption)
+			amount -= player.getAbsorptionAmount();
+
 		IDamageAdapter adapter = TraumaApiLib.getDamageAdapter(damageSource.getDamageType());
 		if(adapter!=null)
 		{

@@ -52,6 +52,9 @@ public class TraumaConfig
 	@Comment("The amount of health that needs to be recovered at minimum to cause a limb to heal. Set to 0 to make healing potions and more not affect limbs")
 	public static int healingThreshold = 4;
 
+	@Comment("Whether absorption hearts should be ignored when calculating limb damage")
+	public static boolean ignoreAbsorption = true;
+
 	public static void loadConfig()
 	{
 		TraumaApiLib.IGNORED_DAMAGES = Sets.newHashSet(ignoredDamages);
