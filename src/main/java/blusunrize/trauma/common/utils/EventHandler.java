@@ -10,10 +10,7 @@ package blusunrize.trauma.common.utils;
 import blusunrize.trauma.api.IDamageAdapter;
 import blusunrize.trauma.api.TraumaApiLib;
 import blusunrize.trauma.api.TraumaApiUtils;
-import blusunrize.trauma.api.condition.CapabilityTrauma;
-import blusunrize.trauma.api.condition.EnumLimb;
-import blusunrize.trauma.api.condition.LimbCondition;
-import blusunrize.trauma.api.condition.TraumaStatus;
+import blusunrize.trauma.api.condition.*;
 import blusunrize.trauma.api.effects.*;
 import blusunrize.trauma.common.TraumaConfig;
 import blusunrize.trauma.common.Utils;
@@ -28,6 +25,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingHealEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -35,6 +33,8 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -153,10 +153,31 @@ public class EventHandler
 	@SubscribeEvent
 	public void onLivingDeath(LivingDeathEvent event)
 	{
-		if(event.getEntityLiving() instanceof EntityPlayer&&!((EntityPlayer)event.getEntityLiving()).world.isRemote&&TraumaConfig.clearOnDeath)
+		if(event.getEntityLiving() instanceof EntityPlayer&&TraumaConfig.clearOnDeath&&!((EntityPlayer)event.getEntityLiving()).world.isRemote)
 		{
 			TraumaApiUtils.clearPlayer((EntityPlayer)event.getEntityLiving());
 			Utils.sendSyncPacket((EntityPlayer)event.getEntityLiving());
+		}
+	}
+
+	@SubscribeEvent
+	public void onLivingHeal(LivingHealEvent event)
+	{
+		if(event.getEntityLiving() instanceof EntityPlayer&&TraumaConfig.healingThreshold>0&&!((EntityPlayer)event.getEntityLiving()).world.isRemote&&event.getAmount()>=TraumaConfig.healingThreshold)
+		{
+			TraumaStatus status = event.getEntityLiving().getCapability(CapabilityTrauma.TRAUMA_CAPABILITY, null);
+			List<EnumLimb> damaged = new ArrayList<>();
+			for(EnumLimb limb : EnumLimb.values())
+				if(status.getLimbCondition(limb).getState()!=EnumTraumaState.NONE)
+					damaged.add(limb);
+			if(!damaged.isEmpty())
+			{
+				EnumLimb select = damaged.get(event.getEntityLiving().getRNG().nextInt(damaged.size()));
+				EnumTraumaState oldState = status.getLimbCondition(select).getState();
+				EnumTraumaState newState = oldState.getBetter();
+				if(TraumaApiUtils.setLimbState((EntityPlayer)event.getEntityLiving(), select, newState, true))
+					Utils.sendSyncPacket((EntityPlayer)event.getEntityLiving());
+			}
 		}
 	}
 }

@@ -49,6 +49,9 @@ public class TraumaConfig
 	@Comment("Whether LimbConditions should be healed upon dying+respawning")
 	public static boolean clearOnDeath = true;
 
+	@Comment("The amount of health that needs to be recovered at minimum to cause a limb to heal. Set to 0 to make healing potions and more not affect limbs")
+	public static int healingThreshold = 4;
+
 	public static void loadConfig()
 	{
 		TraumaApiLib.IGNORED_DAMAGES = Sets.newHashSet(ignoredDamages);
