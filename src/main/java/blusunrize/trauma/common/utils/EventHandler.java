@@ -20,9 +20,12 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.NonNullList;
+import net.minecraftforge.common.ISpecialArmor;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHealEvent;
@@ -62,6 +65,13 @@ public class EventHandler
 		EntityPlayer player = (EntityPlayer)event.getEntityLiving();
 		DamageSource damageSource = event.getSource();
 		float amount = event.getAmount();
+
+		amount = ISpecialArmor.ArmorProperties.applyArmor(player, (NonNullList<ItemStack>)player.getArmorInventoryList(), damageSource, amount);
+		if(amount<=0)
+			return;
+		amount = player.applyPotionDamageCalculations(damageSource, amount);
+		if(amount<=0)
+			return;
 
 		if(TraumaApiLib.isIgnoredDamage(damageSource))
 			return;
