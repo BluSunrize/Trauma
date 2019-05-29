@@ -7,7 +7,7 @@ Healing these injuries takes quite a bit of time, so it's probably best just not
 
 
 
-###Adding Compatability:
+### Adding Compatability
 Your easiest way to add compat with Trauma to your mods is to grab it from maven.
 To do so, add this to your buildscript:
 ```
@@ -26,5 +26,5 @@ dependencies {
 ```
 Make sure to replace [VERSION] with the version of the mod you want to work with.
 
-###Credits:
+### Credits
 Trauma's logo uses a modified image from game-icons.net, licensed under CC BY 3.0
